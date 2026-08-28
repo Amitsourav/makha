@@ -2,22 +2,22 @@
    Mood-filtered, house-ordered. Shares cart state via localStorage('sva-cart'). */
 
 const VOLUMES = [
-  { slug: 'salt', no: '01', name: 'Himalayan Salt & A2 Ghee', photo: 'assets/salt-pouch.png', mood: 'The quiet one. For evenings that need nothing added.',
+  { slug: 'salt', no: '01', name: 'Himalayan Salt & A2 Ghee', photo: 'assets/salt-pouch.webp', mood: 'The quiet one. For evenings that need nothing added.',
     moodKey: 'quiet', notes: 'Ghee warmth · Pink salt · Morning-toast roast', heat: 0,
     rating: 4.9, count: 812, price: 349, fc: '#E8DCC8', ft: '#2C1D18', tag: 'Best seller' },
-  { slug: 'peri', no: '02', name: 'Guntur Peri-Peri', photo: 'assets/peri-pouch.jpg', mood: 'The loud one. Slow heat that earns its applause.',
+  { slug: 'peri', no: '02', name: 'Guntur Peri-Peri', photo: 'assets/peri-pouch.webp', mood: 'The loud one. Slow heat that earns its applause.',
     moodKey: 'loud', notes: 'Guntur chilli · Lime leaf · Slow-building heat', heat: 3,
     rating: 4.8, count: 623, price: 349, fc: '#B0501C', ft: '#F8F4EE' },
-  { slug: 'bbq', no: '03', name: 'Smoked Paprika BBQ', photo: 'assets/bbq-pouch.jpg', mood: 'The campfire one. Open fire, politely tinned.',
+  { slug: 'bbq', no: '03', name: 'Smoked Paprika BBQ', photo: 'assets/bbq-pouch.webp', mood: 'The campfire one. Open fire, politely tinned.',
     moodKey: 'loud', notes: 'Oak smoke · Kashmiri chilli · Gentle sweetness', heat: 2,
     rating: 4.8, count: 291, price: 349, fc: '#8A5A3C', ft: '#F8F4EE' },
-  { slug: 'cheese', no: '04', name: 'Amber Cheese & Garlic', photo: 'assets/cheese-pouch.jpg', mood: 'The dangerous one. Restraint sold separately.',
+  { slug: 'cheese', no: '04', name: 'Amber Cheese & Garlic', photo: 'assets/cheese-pouch.webp', mood: 'The dangerous one. Restraint sold separately.',
     moodKey: 'loud', notes: 'Aged cheese · Toasted garlic · Black pepper', heat: 1,
     rating: 4.7, count: 355, price: 379, fc: '#B98E4A', ft: '#2C1D18' },
-  { slug: 'choc', no: '05', name: 'Dark Chocolate & Sea Salt', photo: 'assets/choc-pouch.jpg', mood: 'The midnight one. Dessert, quietly redeemed.',
+  { slug: 'choc', no: '05', name: 'Dark Chocolate & Sea Salt', photo: 'assets/choc-pouch.webp', mood: 'The midnight one. Dessert, quietly redeemed.',
     moodKey: 'sweet', notes: 'Idukki cacao 64% · Sea salt · Crisp centre', heat: 0,
     rating: 4.9, count: 502, price: 399, fc: '#3B2A1E', ft: '#F8F4EE' },
-  { slug: 'truffle', no: '06', name: 'Black Truffle & Pepper', photo: 'assets/truffle-pouch.jpg', mood: 'The occasion one. Lives on desks, gets defended.',
+  { slug: 'truffle', no: '06', name: 'Black Truffle & Pepper', photo: 'assets/truffle-pouch.webp', mood: 'The occasion one. Lives on desks, gets defended.',
     moodKey: 'occasion', notes: 'Shaved truffle · Cultured butter · Tellicherry', heat: 1,
     rating: 4.9, count: 418, price: 499, fc: '#2E2A26', ft: '#F8F4EE', tag: 'Flagship', tagDark: true },
 ];
