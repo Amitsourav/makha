@@ -42,6 +42,11 @@ body{
 }
 ::selection{ background:var(--sindoor); color:var(--cream); }
 img,svg{ display:block; max-width:100%; }
+/* Images carry intrinsic width/height attributes so the browser can reserve
+   space (CLS budget is 0). Component rules size them by width alone, so the
+   height must stay auto or the attribute would drive layout. Any rule that
+   sets an explicit height still overrides this. */
+img{ height:auto; }
 a{ color:inherit; }
 button{ font-family:inherit; cursor:pointer; }
 :focus-visible{ outline:2px solid var(--sindoor); outline-offset:3px; }
