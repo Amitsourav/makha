@@ -299,3 +299,26 @@
     padding:.6rem 1rem; font-size:.68rem; letter-spacing:.08em;
   }
 }
+
+/* ─── gallery: allow the column to shrink below its content ───────
+   .gallery__main is a grid whose implicit column is sized to max-content.
+   The active view holds .gallery__img--scene at width:min(520px, 92%),
+   so the column floored at ~394px and the whole PDP scrolled sideways on
+   any phone narrower than ~412px. minmax(0,1fr) lets it shrink; the
+   percentage widths inside then resolve against the real viewport. */
+.gallery__main{ grid-template-columns:minmax(0, 1fr); }
+.gallery__view{ min-width:0; max-width:100%; }
+.gallery__svg, .gallery__img, .gallery__img--scene{ max-width:100%; }
+
+/* The actual floor was the grid item, not the gallery's own column: a
+   `1fr` track is minmax(auto,1fr), and `auto` resolves to min-content —
+   so .gallery could never shrink below its widest child. */
+.buy__grid{ grid-template-columns:minmax(0, 1.05fr) minmax(0, .95fr); }
+@media (max-width: 1020px){
+  .buy__grid{ grid-template-columns:minmax(0, 1fr); }
+  .gallery, .buybox{ min-width:0; }
+}
+
+@media (hover: none){
+  .gallery__thumb{ min-height:44px; }
+}

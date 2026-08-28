@@ -829,3 +829,31 @@ p, li, h1, h2, h3, h4, a, td, th{ overflow-wrap:break-word; }
 @media (min-width: 1800px){
   :root{ --w: min(1440px, 88vw); }
 }
+
+/* --- 9. Touch targets, second pass ------------------------------
+   The first pass covered the cart, FAQ and chips but missed the nav
+   itself — its links measured 14px tall, the smallest tap targets on
+   the site. Padding (not height) keeps the visual rhythm intact while
+   giving the thumb a 44px band. */
+@media (hover: none){
+  .nav__links a{
+    display:flex; align-items:center; min-height:44px; padding-inline:2px;
+  }
+  .nav__links{ padding-block:0; }
+  .nav__brand{ min-height:44px; align-items:center; }
+  .nav__cta{ min-height:40px; display:inline-flex; align-items:center; }
+  .btn, .btn-add{ min-height:44px; }
+  .link-arrow{ display:inline-flex; align-items:center; min-height:40px; }
+}
+
+/* --- 10. Minimum legible type on small screens ------------------
+   The identity system uses small letterspaced caps as a deliberate
+   device (02-identity §6), and that stays. But a few labels landed at
+   9.3–9.9px, which is below what a phone can render cleanly. Raised
+   only under 560px, only for the offenders — desktop is untouched. */
+@media (max-width: 560px){
+  .fcard__tag, .vol__tag, .vol__tag--dark{ font-size:.68rem; }
+  .vol__notes, .notecard__from{ font-size:.72rem; }
+  .fcard__index{ font-size:.7rem; }
+  .colcard__badge, .btn-add{ font-size:.72rem; }
+}

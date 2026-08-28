@@ -248,3 +248,28 @@
   .moodbar__count{ display:none; }
   .begin__rail{ grid-auto-columns:82%; }
 }
+
+/* ─── minimum legible type on phones ───
+   Lives here, not in styles.css: collection.css loads after it, so an
+   override in styles.css would lose on equal specificity. */
+@media (max-width: 560px){
+  .vol__tag, .vol__tag--dark{ font-size:.68rem; }
+  .vol__notes{ font-size:.72rem; }
+  .begincard__k, .moodbar__label{ font-size:.7rem; }
+}
+
+/* Same min-content floor as the PDP gallery: `1fr` is minmax(auto,1fr),
+   so the meta column refused to shrink and pushed 3px past a 280px
+   viewport. Below 400px the row stacks entirely — a 78px pack thumbnail
+   beside text is not a layout, it is a compromise. */
+@media (max-width: 700px){
+  .vol{ grid-template-columns:78px minmax(0, 1fr); }
+}
+@media (max-width: 400px){
+  .vol{
+    grid-template-columns:minmax(0, 1fr);
+    grid-template-areas:"pack" "meta" "buy";
+    gap:.8rem; justify-items:start;
+  }
+  .vol__pack{ width:92px; }
+}

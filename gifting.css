@@ -239,3 +239,34 @@
 
 /* [hidden] must always win over component display rules */
 .gift-body [hidden]{ display:none !important; }
+
+/* ─── corporate tier table on small phones ───────────────────────
+   4.5rem + 4.5rem + 1fr plus the card's 1.8rem side padding is wider
+   than a 320px viewport, so the table pushed the page sideways. */
+@media (max-width: 420px){
+  .corp__table{ padding:1.2rem 1.1rem; }
+  .crow{ grid-template-columns:1fr auto; gap:.3rem .8rem; font-size:.82rem; }
+  /* the third cell (the note) drops to its own full-width line */
+  .crow > :last-child{ grid-column:1 / -1; font-size:.76rem; }
+  .crow--head{ display:none; } /* column headers are meaningless once stacked */
+}
+
+/* ─── minimum legible type on phones (see note in collection.css) ─── */
+@media (max-width: 560px){
+  .notecard__from{ font-size:.72rem; }
+  .opt__label, .opt__hint{ font-size:.72rem; }
+  .corp__fine{ font-size:.72rem; }
+}
+
+@media (hover: none){
+  .pick{ min-height:44px; }
+}
+
+/* The checkbox sits inside its <label>, so the effective target is the
+   whole row — but the date field opens a picker only when the input
+   itself is hit, so it needs the full 44px band on touch. */
+@media (hover: none){
+  .summary__opt{ min-height:44px; display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; }
+  .summary__opt input[type="checkbox"]{ width:20px; height:20px; flex:0 0 auto; }
+  .summary__opt input[type="date"]{ min-height:44px; flex:1 1 auto; }
+}
