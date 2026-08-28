@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Internal design board — not for indexing
+Disallow: /packaging-board.html
+
+Sitemap: https://svasnacks.in/sitemap.xml
