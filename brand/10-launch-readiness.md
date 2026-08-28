@@ -144,3 +144,84 @@ formats.
 is the fork in the road — and 08-frontend-architecture.md already argues for
 the Next.js + Shopify rebuild rather than bolting a gateway onto static HTML.
 That decision is worth making before writing any more code.
+
+---
+
+# PROGRESS LOG & OPEN TASKS
+### Live status — last updated 2026-08-28
+
+**Decisions taken** (locked, do not relitigate without a reason):
+- **Commerce:** Razorpay bolt-on, site stays static. Not Shopify, not the
+  Next.js rebuild of 08-frontend-architecture.md — that doc remains the
+  long-term target, not the launch path.
+- **Hosting:** Vercel.
+- **Domain assumed:** `svasnacks.in`, inferred from the mailto: addresses and
+  now baked into canonical/sitemap/OG tags. **UNCONFIRMED — verify before
+  DNS.** If wrong, rewrite: `robots.txt`, `sitemap.xml`, and the canonical +
+  og:url + og:image/twitter:image tags in all 7 HTML files.
+- **Compliance:** a real FSSAI licence and real reviews are said to exist;
+  both still need to be supplied and wired in.
+
+## Status by gap
+
+| # | Gap | Phase | Status |
+|---|---|---|---|
+| 1 | Checkout button dead | 2 | **OPEN — top blocker** |
+| 2 | No payment / order capture | 2 | **OPEN — top blocker** |
+| 3 | Cart line-item split bug | 2 | **OPEN** |
+| 4 | Newsletter captures nothing | 1 | **OPEN** |
+| 5 | No legal pages | 1 | **OPEN — needs business facts** |
+| 6 | Fabricated social proof | 1 | **OPEN — needs real review data** |
+| 7 | FSSAI placeholder number | 1 | **OPEN — needs real licence no.** |
+| 8 | No SEO infrastructure | 3 | DONE (commit 4b700d8) |
+| 9 | 25MB unoptimized assets | 0 | DONE (commit 335a925) — now 5.4MB |
+| 10 | CDN with no SRI | 3 | DONE (commit 4b700d8) |
+| 11 | Zero analytics | 4 | OPEN |
+| 12 | Cart drawer not accessible | 5 | OPEN |
+| 13 | Roast week hardcoded 8+ places | 5 | OPEN |
+| 14 | Cart logic copy-pasted 5x | 2 | OPEN — fix with gap #3 |
+| 15 | Product data forked 3 files | 2 | OPEN — fix with gap #3 |
+| — | P2 items (subscribe/faq/contact pages, gift note, delivery date, GST line, inventory, order email, tests) | 2–5 | OPEN |
+
+Also delivered outside the original gap list: git repository initialised with
+a clean baseline commit, README, `.gitignore` (excludes `.env`), branded
+404 page, `vercel.json` with security headers and immutable asset caching,
+intrinsic width/height on every `<img>`.
+
+## BLOCKED — inputs needed from the business
+
+Nothing below can be written by an engineer; these are facts only the
+business has. Every one of them blocks launch.
+
+1. **FSSAI licence number** — replaces the placeholder `10424999000123`,
+   which currently appears in the footer of every page.
+2. **Real review data** — actual ratings, counts and review text, or the
+   platform they live in (Judge.me / Google / Instagram). Until supplied,
+   `index.html` claims "2,400+ reviews", `collection.js:7-22` hardcodes
+   per-SKU counts, and `pdp.js` ships reviews from people who do not exist.
+3. **Razorpay Key ID** (public). The Key Secret goes directly into Vercel
+   environment variables — never into the repo, never pasted into chat.
+4. **Legal-page facts** — registered entity name and address, GSTIN,
+   support email and phone, shipping rates and timelines, and confirmation
+   of the 30-day full-refund promise the copy already makes.
+5. **Domain confirmation** (see above).
+
+## NEXT TASK — Phase 2, the commerce layer
+
+The one remaining block on taking money. Scope, in order:
+
+1. Extract a single shared `cart.js` — deletes the five copy-pasted
+   implementations in `main.js`, `pdp.js`, `collection.js`, `gifting.js`,
+   `editorial.js` (gap #14).
+2. Extract a single `products.js` as the one source of price truth,
+   replacing the forked data in three JS files and the prices hardcoded
+   into `index.html` (gap #15).
+3. Fix the cart key so a PDP add and a homepage add of the same tin merge
+   into one line instead of two at different prices (gap #3).
+4. Wire the Checkout button: `/api/order.js` (Razorpay order creation) and
+   `/api/webhook.js` (HMAC signature verification) as Vercel functions,
+   reading `RAZORPAY_KEY_ID` / `RAZORPAY_KEY_SECRET` from env (gaps #1, #2).
+5. Order confirmation state and an order email.
+
+Steps 1–4 can be built and tested against Razorpay **test** keys before the
+live keys exist. Only go-live needs the real ones.
