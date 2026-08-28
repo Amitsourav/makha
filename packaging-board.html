@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>स्वsnacks — Packaging System Board · The Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F8F4EE; --white:#fff; --cocoa:#5C4033; --esp:#2C1D18;
+  --beige:#EFE7DA; --copper:#A97C50; --copper2:#C9A578; --sindoor:#B0501C;
+  --ink50:rgba(44,29,24,.55); --ink12:rgba(44,29,24,.12);
+  --fd:'Rozha One',serif; --fb:'Hanken Grotesk',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--cream);color:var(--esp);font-family:var(--fb);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{width:min(1280px,94vw);margin-inline:auto}
+header.board{padding:4rem 0 2.5rem;border-bottom:1px solid var(--ink12)}
+.kicker{font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:var(--copper)}
+h1{font-family:var(--fd);font-weight:400;font-size:clamp(2rem,4.5vw,3.4rem);line-height:1.1;margin-top:.6rem}
+h1 em{font-style:italic;color:var(--cocoa)}
+.lede{max-width:46rem;color:var(--ink50);margin-top:1rem}
+section{padding:3.5rem 0;border-bottom:1px solid var(--ink12)}
+h2{font-family:var(--fd);font-weight:400;font-size:1.6rem;margin-bottom:.4rem}
+.note{font-size:.85rem;color:var(--ink50);max-width:44rem;margin-bottom:2.2rem}
+.row{display:grid;gap:1.5rem}
+.row--4{grid-template-columns:repeat(4,1fr)}
+.row--3{grid-template-columns:repeat(3,1fr)}
+.cell{background:var(--white);border-radius:16px;padding:1.6rem 1.2rem;box-shadow:0 1px 2px rgba(44,29,24,.05),0 10px 28px rgba(44,29,24,.07);text-align:center}
+.cell h3{font-family:var(--fd);font-weight:400;font-size:1.05rem;margin-top:1rem}
+.cell p{font-size:.78rem;color:var(--ink50);margin-top:.3rem}
+.cell .shelf{font-size:.66rem;letter-spacing:.26em;font-weight:600;color:var(--copper);text-transform:uppercase}
+svg{display:block;max-width:100%}
+.packsvg{width:min(200px,80%);margin-inline:auto}
+/* pack text styles */
+.p-deva{font-family:var(--fd);font-size:15px;fill:var(--esp)}
+.p-deva--seal{fill:#C9A578;font-size:13px}
+.p-cat{font-family:var(--fd);font-size:19px;fill:var(--esp);letter-spacing:.4px}
+.p-flav{font-family:var(--fd);font-size:11px;fill:var(--cocoa)}
+.p-grade{font-family:var(--fb);font-size:5.6px;letter-spacing:1.6px;fill:var(--esp);opacity:.55;font-weight:600}
+.p-stamp{font-family:var(--fb);font-size:6.5px;letter-spacing:1px;fill:var(--sindoor);font-weight:700}
+.p-band{font-family:var(--fb);font-size:7.5px;letter-spacing:1.4px;font-weight:700}
+.p-vol{font-family:var(--fd);font-size:15px;font-weight:400}
+.p-edge{font-family:var(--fb);font-size:8px;letter-spacing:2px;fill:var(--copper2);font-weight:600}
+.p-ring{font-family:var(--fb);font-size:4.6px;letter-spacing:1.1px;fill:var(--copper);font-weight:600}
+/* chips */
+.chips{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
+.chip{border-radius:12px;overflow:hidden;background:var(--white);box-shadow:0 8px 20px rgba(44,29,24,.06)}
+.chip .swatch{height:74px}
+.chip .m{padding:.8rem .9rem}
+.chip .m b{display:block;font-size:.78rem}
+.chip .m span{font-size:.68rem;color:var(--ink50)}
+.backlayout{display:grid;grid-template-columns:280px 1fr;gap:2.5rem;align-items:start}
+.backlist{list-style:none}
+.backlist li{padding:.85rem 0;border-top:1px solid var(--ink12);font-size:.88rem}
+.backlist b{color:var(--esp)} .backlist span{color:var(--ink50)}
+footer{padding:2.5rem 0 3.5rem;font-size:.75rem;color:var(--ink50)}
+@media(max-width:900px){.row--4,.row--3{grid-template-columns:repeat(2,1fr)}.chips{grid-template-columns:repeat(3,1fr)}.backlayout{grid-template-columns:1fr}}
+@media(max-width:560px){.row--4,.row--3{grid-template-columns:1fr}.chips{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+  <linearGradient id="pshade" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset=".22" stop-color="#000" stop-opacity="0"/>
+    <stop offset=".55" stop-color="#fff" stop-opacity=".10"/><stop offset=".85" stop-color="#000" stop-opacity="0"/>
+    <stop offset="1" stop-color="#000" stop-opacity=".25"/>
+  </linearGradient>
+  <!-- pouch chassis: Z1 seal · Z2 panel · Z3 stamp · Z4 band · edge numeral -->
+  <g id="pouch-chassis">
+    <ellipse cx="100" cy="284" rx="66" ry="7" fill="#2C1D18" opacity=".14"/>
+    <path d="M42 40 Q38 26 50 26 L150 26 Q162 26 158 40 L164 258 Q165 278 144 278 L56 278 Q35 278 36 258 Z" fill="#2C1D18"/>
+    <path d="M42 40 Q38 26 50 26 L150 26 Q162 26 158 40 L164 258 Q165 278 144 278 L56 278 Q35 278 36 258 Z" fill="url(#pshade)" opacity=".55"/>
+    <rect x="46" y="32" width="108" height="8" rx="3" fill="#4A362B"/>
+    <circle cx="100" cy="66" r="17" fill="none" stroke="#A97C50" stroke-width="1"/>
+    <rect x="52" y="96" width="96" height="118" rx="5" fill="#F8F4EE"/>
+    <rect x="66" y="222" width="68" height="16" rx="2" fill="none" stroke="#B0501C" stroke-width=".9" stroke-dasharray="2 1.6"/>
+  </g>
+  <!-- category glyphs (1.5pt line grammar) -->
+  <g id="gl-makhana" fill="none" stroke="#2C1D18" stroke-width="1.5">
+    <circle cx="0" cy="0" r="6.5"/><path d="M-4 -2 a6.5 6.5 0 0 1 8 0"/><circle cx="8" cy="-6" r="2.2"/>
+  </g>
+  <g id="gl-popcorn" fill="none" stroke="#2C1D18" stroke-width="1.5">
+    <circle cx="-3.4" cy="-1.5" r="4"/><circle cx="3.4" cy="-2.2" r="3.4"/><circle cx="0" cy="3" r="4"/>
+  </g>
+  <g id="gl-puffs" fill="none" stroke="#2C1D18" stroke-width="1.5">
+    <rect x="-8" y="-6" width="16" height="6" rx="3"/><rect x="-5" y="2" width="16" height="6" rx="3"/>
+  </g>
+  <g id="gl-millet" fill="none" stroke="#2C1D18" stroke-width="1.5">
+    <path d="M0 8 L0 -2"/><circle cx="0" cy="-6" r="2.4"/><circle cx="-5" cy="-2" r="2.4"/><circle cx="5" cy="-2" r="2.4"/><circle cx="-4" cy="4" r="2.4"/><circle cx="4" cy="4" r="2.4"/>
+  </g>
+</defs>
+</svg>
+
+<header class="board">
+  <div class="wrap">
+    <p class="kicker">स्वsnacks · House of Mithila — Packaging System v1.0</p>
+    <h1>The Library. <em>One block, many volumes.</em></h1>
+    <p class="lede">One espresso ground owned across every category. Categories are Shelves (I–IV). Flavours are numbered Volumes wearing a shared color library. A row of packs reads as a collected set of first editions — instantly recognizable at five metres, infinitely extendable at the fourth decision.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>A · The system scales: four shelves, one chassis</h2>
+    <p class="note">Every pack: seal (Z1) → cream panel with glyph, category, flavour, grade (Z2) → hand-stamped roast week (Z3) → flavour band with volume number (Z4) → copper shelf numeral on the edge. A new category needs only four decisions: numeral, word, glyph, volume list.</p>
+    <div class="row row--4">
+
+      <div class="cell">
+        <svg class="packsvg" viewBox="0 0 200 296">
+          <use href="#pouch-chassis"/>
+          <text x="100" y="71" text-anchor="middle" class="p-deva p-deva--seal">स्व</text>
+          <use href="#gl-makhana" transform="translate(100,112)"/>
+          <text x="100" y="140" text-anchor="middle" class="p-cat">MAKHANA</text>
+          <text x="100" y="158" text-anchor="middle" class="p-flav" textLength="90" lengthAdjust="spacingAndGlyphs">Himalayan Salt &amp; A2 Ghee</text>
+          <line x1="72" y1="168" x2="128" y2="168" stroke="#2C1D18" stroke-width=".6" opacity=".3"/>
+          <text x="100" y="182" text-anchor="middle" class="p-grade" textLength="94" lengthAdjust="spacingAndGlyphs">ROASTED LOTUS SEED · 6-SUTA LAWA · 24MM+</text>
+          <text x="100" y="232.5" text-anchor="middle" class="p-stamp">ROAST WK 29</text>
+          <rect x="36" y="244" width="128.5" height="26" fill="#E8DCC8"/>
+          <text x="46" y="264" class="p-vol" fill="#2C1D18">No.01</text>
+          <text x="156" y="262" text-anchor="end" class="p-band" fill="#2C1D18">80g</text>
+          <text x="24" y="200" class="p-edge" transform="rotate(-90 24 200)">SHELF I</text>
+        </svg>
+        <p class="shelf">Shelf I · Launch</p><h3>Makhana</h3><p>Vol No.01 · Warm Ivory band</p>
+      </div>
+
+      <div class="cell">
+        <svg class="packsvg" viewBox="0 0 200 296">
+          <use href="#pouch-chassis"/>
+          <text x="100" y="71" text-anchor="middle" class="p-deva p-deva--seal">स्व</text>
+          <use href="#gl-popcorn" transform="translate(100,112)"/>
+          <text x="100" y="140" text-anchor="middle" class="p-cat">POPCORN</text>
+          <text x="100" y="158" text-anchor="middle" class="p-flav" textLength="90" lengthAdjust="spacingAndGlyphs">Desi Ghee &amp; Pink Salt</text>
+          <line x1="72" y1="168" x2="128" y2="168" stroke="#2C1D18" stroke-width=".6" opacity=".3"/>
+          <text x="100" y="182" text-anchor="middle" class="p-grade" textLength="94" lengthAdjust="spacingAndGlyphs">HEIRLOOM MUSHROOM KERNEL · STONE-GROUND</text>
+          <text x="100" y="232.5" text-anchor="middle" class="p-stamp">POP WK 04</text>
+          <rect x="36" y="244" width="128.5" height="26" fill="#E8DCC8"/>
+          <text x="46" y="264" class="p-vol" fill="#2C1D18">No.01</text>
+          <text x="156" y="262" text-anchor="end" class="p-band" fill="#2C1D18">90g</text>
+          <text x="24" y="200" class="p-edge" transform="rotate(-90 24 200)">SHELF II</text>
+        </svg>
+        <p class="shelf">Shelf II · Future</p><h3>Popcorn</h3><p>Same volume, same ivory — flavour families own color</p>
+      </div>
+
+      <div class="cell">
+        <svg class="packsvg" viewBox="0 0 200 296">
+          <use href="#pouch-chassis"/>
+          <text x="100" y="71" text-anchor="middle" class="p-deva p-deva--seal">स्व</text>
+          <use href="#gl-puffs" transform="translate(100,112)"/>
+          <text x="100" y="140" text-anchor="middle" class="p-cat" textLength="90" lengthAdjust="spacingAndGlyphs">PROTEIN PUFFS</text>
+          <text x="100" y="158" text-anchor="middle" class="p-flav">Guntur Peri-Peri</text>
+          <line x1="72" y1="168" x2="128" y2="168" stroke="#2C1D18" stroke-width=".6" opacity=".3"/>
+          <text x="100" y="182" text-anchor="middle" class="p-grade" textLength="94" lengthAdjust="spacingAndGlyphs">SLOW-PUFFED · NEVER EXTRUDED · 20G PROTEIN</text>
+          <text x="100" y="232.5" text-anchor="middle" class="p-stamp">PUFF WK 02</text>
+          <rect x="36" y="244" width="128.5" height="26" fill="#B0501C"/>
+          <text x="46" y="264" class="p-vol" fill="#F8F4EE">No.02</text>
+          <text x="156" y="262" text-anchor="end" class="p-band" fill="#F8F4EE">70g</text>
+          <text x="24" y="200" class="p-edge" transform="rotate(-90 24 200)">SHELF III</text>
+        </svg>
+        <p class="shelf">Shelf III · Future</p><h3>Protein Puffs</h3><p>Vol No.02 · Burnt Orange band</p>
+      </div>
+
+      <div class="cell">
+        <svg class="packsvg" viewBox="0 0 200 296">
+          <use href="#pouch-chassis"/>
+          <text x="100" y="71" text-anchor="middle" class="p-deva p-deva--seal">स्व</text>
+          <use href="#gl-millet" transform="translate(100,110)"/>
+          <text x="100" y="140" text-anchor="middle" class="p-cat" textLength="90" lengthAdjust="spacingAndGlyphs">MILLET CRUNCH</text>
+          <text x="100" y="158" text-anchor="middle" class="p-flav" textLength="90" lengthAdjust="spacingAndGlyphs">Jaggery &amp; Toasted Sesame</text>
+          <line x1="72" y1="168" x2="128" y2="168" stroke="#2C1D18" stroke-width=".6" opacity=".3"/>
+          <text x="100" y="182" text-anchor="middle" class="p-grade" textLength="94" lengthAdjust="spacingAndGlyphs">RAGI &amp; JOWAR · STONE-MILLED · SLOW-BAKED</text>
+          <text x="100" y="232.5" text-anchor="middle" class="p-stamp">BAKE WK 07</text>
+          <rect x="36" y="244" width="128.5" height="26" fill="#3B2A1E"/>
+          <text x="46" y="264" class="p-vol" fill="#F8F4EE">No.05</text>
+          <text x="156" y="262" text-anchor="end" class="p-band" fill="#F8F4EE">85g</text>
+          <text x="24" y="200" class="p-edge" transform="rotate(-90 24 200)">SHELF IV</text>
+        </svg>
+        <p class="shelf">Shelf IV · Future</p><h3>Millet Crunch</h3><p>Vol No.05 · Deep Cocoa band</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>B · The shared flavour library</h2>
+    <p class="note">Flavour families — not categories — own color. Makhana No.01 and Popcorn No.01 wear the same Warm Ivory: one library, every shelf. Saturation capped: spice drawer, not candy aisle. A seventh color requires a petition.</p>
+    <div class="chips">
+      <div class="chip"><div class="swatch" style="background:#E8DCC8"></div><div class="m"><b>No.01 Warm Ivory</b><span>Salt &amp; Ghee · PMS 9224C</span></div></div>
+      <div class="chip"><div class="swatch" style="background:#B0501C"></div><div class="m"><b>No.02 Burnt Orange</b><span>Chilli · PMS 173C</span></div></div>
+      <div class="chip"><div class="swatch" style="background:#8A5A3C"></div><div class="m"><b>No.03 Smoked Copper</b><span>BBQ / Smoke · PMS 4705C</span></div></div>
+      <div class="chip"><div class="swatch" style="background:#B98E4A"></div><div class="m"><b>No.04 Muted Gold</b><span>Cheese · PMS 7551C</span></div></div>
+      <div class="chip"><div class="swatch" style="background:#3B2A1E"></div><div class="m"><b>No.05 Deep Cocoa</b><span>Chocolate / Sweet · PMS 4625C</span></div></div>
+      <div class="chip"><div class="swatch" style="background:#2E2A26"></div><div class="m"><b>No.06 Charcoal</b><span>Truffle / Reserve · PMS 419C + copper</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>C · The format ladder</h2>
+    <p class="note">Four formats, one chassis — the five zones never move. A customer who knows the pouch can navigate the jar blindfolded.</p>
+    <div class="row row--4">
+      <div class="cell">
+        <svg class="packsvg" viewBox="0 0 200 296"><use href="#pouch-chassis"/>
+          <text x="100" y="71" text-anchor="middle" class="p-deva p-deva--seal">स्व</text>
+          <use href="#gl-makhana" transform="translate(100,112)"/>
+          <text x="100" y="140" text-anchor="middle" class="p-cat">MAKHANA</text>
+          <text x="100" y="158" text-anchor="middle" class="p-flav">Guntur Peri-Peri</text>
+          <text x="100" y="182" text-anchor="middle" class="p-grade" textLength="94" lengthAdjust="spacingAndGlyphs">ROASTED LOTUS SEED · 24MM+</text>
+          <text x="100" y="232.5" text-anchor="middle" class="p-stamp">ROAST WK 29</text>
+          <rect x="36" y="244" width="128.5" height="26" fill="#B0501C"/>
+          <text x="46" y="264" class="p-vol" fill="#F8F4EE">No.02</text>
+          <text x="156" y="262" text-anchor="end" class="p-band" fill="#F8F4EE">80g</text>
+          <text x="24" y="200" class="p-edge" transform="rotate(-90 24 200)">SHELF I</text>
+        </svg>
+        <h3>Stand-up Pouch</h3><p>80g/200g · everyday &amp; trial · no window, ever</p>
+      </div>
+      <div class="cell">
+        <svg class="packsvg" viewBox="0 0 200 296">
+          <ellipse cx="100" cy="284" rx="60" ry="7" fill="#2C1D18" opacity=".14"/>
+          <rect x="48" y="66" width="104" height="212" rx="18" fill="#fff" opacity=".5"/>
+          <rect x="48" y="66" width="104" height="212" rx="18" fill="none" stroke="#2C1D18" stroke-width="1.3" opacity=".55"/>
+          <g fill="#EFE5D3"><circle cx="72" cy="248" r="9"/><circle cx="95" cy="256" r="10"/><circle cx="120" cy="250" r="9"/><circle cx="135" cy="258" r="7"/><circle cx="82" cy="230" r="8"/><circle cx="110" cy="232" r="9"/><circle cx="130" cy="226" r="7"/><circle cx="64" cy="264" r="7"/><circle cx="118" cy="268" r="8"/></g>
+          <rect x="44" y="40" width="112" height="26" rx="8" fill="#2C1D18"/>
+          <g fill="#EFE5D3" opacity=".85"><circle cx="76" cy="96" r="8"/><circle cx="100" cy="102" r="9"/><circle cx="124" cy="98" r="8"/></g>
+          <rect x="58" y="126" width="84" height="70" rx="4" fill="#F8F4EE" stroke="#2C1D18" stroke-opacity=".1"/>
+          <circle cx="100" cy="148" r="12" fill="none" stroke="#A97C50" stroke-width=".9"/>
+          <text x="100" y="152" text-anchor="middle" class="p-deva" style="font-size:11px">स्व</text>
+          <text x="100" y="174" text-anchor="middle" class="p-cat" style="font-size:12px">MAKHANA</text>
+          <text x="100" y="186" text-anchor="middle" class="p-grade">GRADE YOU CAN SEE</text>
+          <rect x="58" y="190" width="84" height="8" fill="#E8DCC8"/>
+        </svg>
+        <h3>Premium Glass Jar</h3><p>150g · 35% belly band, lid-top printed · the grade is the front</p>
+      </div>
+      <div class="cell">
+        <svg class="packsvg" viewBox="0 0 200 296">
+          <ellipse cx="100" cy="284" rx="58" ry="7" fill="#2C1D18" opacity=".14"/>
+          <path d="M54 78 Q54 66 66 66 L134 66 Q146 66 146 78 L146 258 Q146 278 126 278 L74 278 Q54 278 54 258 Z" fill="#2C1D18"/>
+          <path d="M54 78 Q54 66 66 66 L134 66 Q146 66 146 78 L146 258 Q146 278 126 278 L74 278 Q54 278 54 258 Z" fill="url(#pshade)" opacity=".5"/>
+          <rect x="118" y="76" width="16" height="192" rx="8" fill="#F8F4EE" opacity=".9"/>
+          <g fill="#E4D6BC"><circle cx="126" cy="96" r="5"/><circle cx="126" cy="116" r="5.5"/><circle cx="126" cy="138" r="5"/><circle cx="126" cy="160" r="5.5"/><circle cx="126" cy="182" r="5"/><circle cx="126" cy="204" r="5.5"/><circle cx="126" cy="226" r="5"/><circle cx="126" cy="248" r="5"/></g>
+          <rect x="50" y="44" width="100" height="24" rx="10" fill="#2C1D18"/>
+          <circle cx="86" cy="120" r="13" fill="none" stroke="#A97C50" stroke-width=".9"/>
+          <text x="86" y="125" text-anchor="middle" class="p-deva p-deva--seal" style="font-size:11px">स्व</text>
+          <text x="86" y="154" text-anchor="middle" class="p-cat" style="font-size:11px;fill:#F8F4EE">MAKHANA</text>
+          <text x="86" y="168" text-anchor="middle" class="p-grade" style="fill:#C9A578;opacity:.85">GRADE IN THE SLIT</text>
+          <rect x="62" y="238" width="48" height="20" fill="#B98E4A"/>
+          <text x="70" y="252" class="p-vol" style="font-size:11px" fill="#2C1D18">No.04</text>
+        </svg>
+        <h3>Premium Plastic Jar</h3><p>250g · espresso sleeve, grade-slit reveal · courier-proof</p>
+      </div>
+      <div class="cell">
+        <svg class="packsvg" viewBox="0 0 200 296">
+          <ellipse cx="100" cy="270" rx="80" ry="7" fill="#2C1D18" opacity=".16"/>
+          <rect x="22" y="150" width="156" height="112" rx="6" fill="#2C1D18"/>
+          <rect x="90" y="150" width="20" height="112" fill="#B0501C"/>
+          <rect x="14" y="118" width="172" height="38" rx="6" fill="#3B2A1E"/>
+          <rect x="88" y="118" width="24" height="38" fill="#B0501C"/>
+          <path d="M100 118 q-11 -16 -20 -5 q-5 7 9 7 Z M100 118 q11 -16 20 -5 q5 7 -9 7 Z" fill="#B0501C"/>
+          <text x="54" y="216" text-anchor="middle" class="p-deva" style="font-size:17px;fill:#C9A578">स्व</text>
+          <text x="146" y="204" text-anchor="middle" class="p-ring" style="font-size:7px">THE TASTING</text>
+          <text x="146" y="216" text-anchor="middle" class="p-ring" style="font-size:7px">LIBRARY</text>
+          <text x="146" y="234" text-anchor="middle" class="p-grade" style="fill:#C9A578;opacity:.85">SIX VOLUMES · SPINE-OUT</text>
+        </svg>
+        <h3>Gifting Box</h3><p>Letterpressed · library-card pocket in lid · shelves like a book</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>D · Back of pack — the honesty side</h2>
+    <div class="backlayout">
+      <svg viewBox="0 0 200 296" style="width:min(220px,100%)">
+        <path d="M42 40 Q38 26 50 26 L150 26 Q162 26 158 40 L164 258 Q165 278 144 278 L56 278 Q35 278 36 258 Z" fill="#F8F4EE" stroke="#2C1D18" stroke-opacity=".2"/>
+        <text x="100" y="52" text-anchor="middle" class="p-grade" style="opacity:.8">THE STANDARD</text>
+        <rect x="56" y="60" width="88" height="26" rx="2" fill="#EFE7DA"/>
+        <text x="100" y="104" text-anchor="middle" class="p-cat" style="font-size:10px">INGREDIENTS, LARGE</text>
+        <text x="100" y="118" text-anchor="middle" class="p-flav" style="font-size:8px">Lotus seeds. A2 ghee. Pink salt.</text>
+        <rect x="56" y="132" width="88" height="44" rx="2" fill="#EFE7DA"/>
+        <text x="100" y="158" text-anchor="middle" class="p-grade" textLength="94" lengthAdjust="spacingAndGlyphs">NUTRITION · TABULAR · NO TRAFFIC LIGHTS</text>
+        <rect x="56" y="188" width="40" height="40" rx="2" fill="none" stroke="#A97C50" stroke-width="1"/>
+        <text x="76" y="211" text-anchor="middle" class="p-ring" style="font-size:5px">QR · POND</text>
+        <text x="120" y="200" class="p-grade" style="font-size:5px">POND No.4, DARBHANGA</text>
+        <text x="120" y="212" class="p-grade" style="font-size:5px">ROASTED WK 29 · 2026</text>
+        <text x="100" y="256" text-anchor="middle" class="p-grade" style="font-size:4.6px">FSSAI · GI-TAGGED MITHILA MAKHANA · MRP · BATCH</text>
+      </svg>
+      <ol class="backlist">
+        <li><b>1 · The Standard</b> <span>— the 60-word story, Rozha, top of pack.</span></li>
+        <li><b>2 · Ingredients, set LARGE</b> <span>— the design feature of the back: "read in one breath." Nothing to hide is the layout.</span></li>
+        <li><b>3 · Nutrition</b> <span>— tabular numerals, no traffic-light theatrics.</span></li>
+        <li><b>4 · Provenance block</b> <span>— named pond, district, roast week, copper QR to "meet your pond."</span></li>
+        <li><b>5 · Legal</b> <span>— FSSAI, GI mark, batch; minimum 2.2mm, never cramped.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">स्वsnacks · House of Mithila — Packaging System Board v1.0 · Full spec: brand/09-packaging-system.md · Print: PMS Black 4C ground, Kurz copper foil, PMS 173C sindoor, uncoated FSC stocks</div>
+</footer>
+</body>
+</html>

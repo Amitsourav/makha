@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shelf I — The Makhana Library · स्वsnacks</title>
+<meta name="description" content="Six volumes of hand-graded Mithila makhana, roasted weekly. Browse the library by mood — quiet, loud, sweet, or the occasion.">
+<meta name="theme-color" content="#F8F4EE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="collection.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232C1D18'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='%23F8F4EE' font-family='serif'%3E%E0%A4%B8%E0%A5%8D%E0%A4%B5%3C/text%3E%3C/svg%3E">
+</head>
+<body class="col-body">
+
+<div class="announce"><p>Complimentary shipping over ₹999 · Every order ships from this week's roast</p></div>
+
+<header class="nav" id="nav">
+  <nav class="nav__inner" aria-label="Primary">
+    <a class="nav__brand" href="index.html" aria-label="स्वsnacks home">
+      <span class="nav__brand-deva">स्व</span><span class="nav__brand-latin">snacks</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="collection.html" aria-current="page">Collections</a></li>
+      <li><a href="index.html#flavors">Flavours</a></li>
+      <li><a href="house-of-mithila.html">Our Story</a></li>
+      <li><a href="gifting.html">Gifting</a></li>
+    </ul>
+    <div class="nav__actions">
+      <a class="nav__cta" href="#library">Shop</a>
+      <button class="nav__cart" id="cartBtn" aria-label="Open cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4.5 7.5h15l-1.2 12a1.5 1.5 0 0 1-1.5 1.35H7.2a1.5 1.5 0 0 1-1.5-1.35L4.5 7.5Z"/>
+          <path d="M8.5 7.5V6a3.5 3.5 0 0 1 7 0v1.5"/>
+        </svg>
+        <span class="nav__cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="col">
+
+  <!-- ═══ LIBRARY HEADER ═══ -->
+  <section class="colhead">
+    <div class="container">
+      <p class="eyebrow eyebrow--copper reveal">Shelf I · Est. Mithila, Bihar</p>
+      <h1 class="colhead__title reveal d-1">The Makhana <em>Library.</em></h1>
+      <p class="colhead__lede reveal d-2">Six volumes of one seed, graded to 24 millimetres and roasted every week. A library is curated, not sorted — the volumes below sit in house order, from the quietest to the occasion.</p>
+      <div class="colhead__meta reveal d-3">
+        <span>Six volumes</span>
+        <span class="dot-div"></span>
+        <span class="roast-line"><span class="pulse"></span>Roast No. 29 ships Friday</span>
+        <span class="dot-div"></span>
+        <span>Free shipping over ₹999</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ COLLECTION STORY ═══ -->
+  <section class="colstory">
+    <div class="container colstory__grid">
+      <p class="colstory__label reveal">The shelf, in one breath</p>
+      <p class="colstory__text reveal d-1">Every volume begins identically — one pond in Darbhanga, one 24-millimetre grade, one weekly fire. The only variable is how far we dare to take the seasoning. Read the shelf top to bottom and you are reading our nerve.</p>
+    </div>
+  </section>
+
+  <!-- ═══ THE INDEX — flavor navigator ═══ -->
+  <nav class="index reveal" aria-label="Volume index">
+    <div class="container">
+      <div class="index__rail" id="indexRail"></div>
+    </div>
+  </nav>
+
+  <!-- ═══ MOOD FILTER ═══ -->
+  <div class="moodbar reveal" id="moodbar" role="group" aria-label="Browse by mood">
+    <div class="container moodbar__inner">
+      <span class="moodbar__label">Browse by mood</span>
+      <span class="moodbar__count" id="moodCount">Six of six volumes</span>
+      <div class="moodbar__chips">
+        <button class="chip is-active" data-mood="all">All volumes</button>
+        <button class="chip" data-mood="quiet">The quiet ones</button>
+        <button class="chip" data-mood="loud">The loud ones</button>
+        <button class="chip" data-mood="sweet">The sweet ones</button>
+        <button class="chip" data-mood="occasion">The occasion</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ THE LEDGER ═══ -->
+  <section class="library" id="library">
+    <div class="container">
+      <div class="library__rows" id="libRows"></div>
+
+      <aside class="tasting reveal" id="tastingBand">
+        <div>
+          <p class="eyebrow eyebrow--copper">The Tasting Library</p>
+          <h3>All six volumes, boxed for gifting.</h3>
+          <p>Every flavour, spine-out in a letterpressed box. Save ₹325.</p>
+        </div>
+        <div class="tasting__buy">
+          <p class="tasting__price"><s>₹2,324</s> ₹1,999</p>
+          <button class="btn-add tasting__btn" data-name="The Tasting Library" data-price="1999" data-fc="#C9A578">Add the set</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ═══ DISCOVERY RAIL ═══ -->
+  <section class="begin">
+    <div class="container">
+      <p class="eyebrow eyebrow--copper reveal">Still deciding?</p>
+      <h2 class="section-title reveal d-1">Begin <em>here.</em></h2>
+      <div class="begin__rail">
+        <a class="begincard reveal" href="product.html?v=salt">
+          <span class="begincard__k">First tin</span>
+          <b>Start where the roasters start.</b>
+          <i>Vol. No.01 · Himalayan Salt &amp; A2 Ghee — nowhere to hide, nothing to prove.</i>
+          <em>₹349 →</em>
+        </a>
+        <a class="begincard reveal d-1" href="product.html?v=peri">
+          <span class="begincard__k">For heat</span>
+          <b>Applause-earning, not dare-taking.</b>
+          <i>Vol. No.02 · Guntur Peri-Peri — slow-building, politely loud.</i>
+          <em>₹349 →</em>
+        </a>
+        <a class="begincard reveal d-2" href="product.html?v=choc">
+          <span class="begincard__k">For midnight</span>
+          <b>Dessert, quietly redeemed.</b>
+          <i>Vol. No.05 · Dark Chocolate &amp; Sea Salt — converts people who "don't snack".</i>
+          <em>₹399 →</em>
+        </a>
+        <div class="begincard begincard--set reveal d-3">
+          <span class="begincard__k">For gifting</span>
+          <b>The whole shelf, boxed.</b>
+          <i>All six volumes, spine-out in a letterpressed box. Save ₹325.</i>
+          <button class="btn-add begincard__btn" data-name="The Tasting Library" data-price="1999" data-fc="#C9A578">Add the set — ₹1,999</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ COLLECTION PHILOSOPHY ═══ -->
+  <section class="philo">
+    <div class="container philo__grid">
+      <h2 class="philo__q reveal">Why only <em>six?</em></h2>
+      <div class="philo__a reveal d-1">
+        <p>A library is judged by what it refuses. Six volumes is not a limitation — it is the editing. Every flavour that wants a number must beat the weakest volume on the shelf, in a blind tasting, three weeks running. Most don't. The shelf stays six until something earns seven.</p>
+        <a class="link-arrow" href="index.html#why">The standard behind the shelf →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ THE LIBRARY GROWS ═══ -->
+  <section class="grows">
+    <div class="container">
+      <p class="eyebrow reveal">The library grows</p>
+      <h2 class="section-title section-title--cream reveal d-1">Three shelves, <em>arriving.</em></h2>
+      <div class="grows__rows">
+        <div class="grows__row reveal"><span>Shelf II</span><b>Popcorn</b><i>Heirloom mushroom kernels, stone-ground seasoning</i><em>Coming soon</em></div>
+        <div class="grows__row reveal d-1"><span>Shelf III</span><b>Protein Puffs</b><i>Puffed the slow way — never extruded</i><em>Coming soon</em></div>
+        <div class="grows__row reveal d-2"><span>Shelf IV</span><b>Millet Crunch</b><i>India's oldest grains, treated like its newest luxury</i><em>Coming soon</em></div>
+      </div>
+      <p class="grows__note reveal d-3">First taste of every new shelf goes to the letter — <a href="index.html#newsForm">join it here</a>.</p>
+    </div>
+  </section>
+
+  <!-- ═══ STANDING ORDER ═══ -->
+  <section class="subscribe">
+    <div class="container subscribe__inner">
+      <div>
+        <p class="eyebrow eyebrow--copper reveal">The standing order</p>
+        <h2 class="section-title section-title--cream reveal d-1">Never reach the bottom <em>unprepared.</em></h2>
+        <p class="subscribe__sub reveal d-2">Any volume, every four weeks, 15% off — chosen on its product page. Pause, swap or cancel in two taps.</p>
+      </div>
+      <a class="btn btn--cream reveal d-2" href="#library">Choose your volumes</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer col-footer">
+  <div class="container">
+    <div class="footer__base">
+      <p>© 2026 स्वsnacks · Makhana House of Mithila</p>
+      <p><a href="index.html">Home</a> · <a href="index.html#faq">FAQ</a> · <a href="mailto:namaste@svasnacks.in">namaste@svasnacks.in</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ CART ═══ -->
+<div class="cart-scrim" id="cartScrim"></div>
+<aside class="cart" id="cart" aria-label="Shopping cart">
+  <div class="cart__head"><h2>Your tins</h2><button class="cart__close" id="cartClose" aria-label="Close cart">✕</button></div>
+  <div class="cart__body" id="cartBody"><p class="cart__empty">Your cart is empty — for now.</p></div>
+  <div class="cart__foot">
+    <div class="cart__ship" id="cartShip">Free shipping unlocks at ₹999</div>
+    <div class="cart__total"><span>Subtotal</span><span id="cartTotal">₹0</span></div>
+    <button class="btn btn--dark cart__checkout">Checkout →</button>
+    <p class="cart__note">30-day taste guarantee · Ships from this week's roast</p>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ═══ SVG DEFS ═══ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="bodyShade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".25"/><stop offset=".2" stop-color="#000" stop-opacity="0"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity=".16"/><stop offset=".85" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".28"/>
+    </linearGradient>
+    <g id="pouch-card">
+      <ellipse cx="100" cy="284" rx="66" ry="7" fill="#2C1D18" opacity=".14"/>
+      <path d="M42 40 Q38 26 50 26 L150 26 Q162 26 158 40 L164 258 Q165 278 144 278 L56 278 Q35 278 36 258 Z" fill="#2C1D18"/>
+      <path d="M42 40 Q38 26 50 26 L150 26 Q162 26 158 40 L164 258 Q165 278 144 278 L56 278 Q35 278 36 258 Z" fill="url(#bodyShade)" opacity=".5"/>
+      <rect x="46" y="32" width="108" height="8" rx="3" fill="#4A362B"/>
+      <circle cx="100" cy="66" r="17" fill="none" stroke="#A97C50" stroke-width="1"/>
+      <text x="100" y="71" text-anchor="middle" class="pc-seal">स्व</text>
+      <rect x="52" y="96" width="96" height="118" rx="5" fill="#F8F4EE"/>
+      <g fill="none" stroke="#2C1D18" stroke-width="1.5" transform="translate(100,112)">
+        <circle r="6.5"/><path d="M-4 -2 a6.5 6.5 0 0 1 8 0"/><circle cx="8" cy="-6" r="2.2"/>
+      </g>
+      <text x="100" y="140" text-anchor="middle" class="pc-cat">MAKHANA</text>
+      <line x1="72" y1="168" x2="128" y2="168" stroke="#2C1D18" stroke-width=".6" opacity=".3"/>
+      <text x="100" y="182" text-anchor="middle" class="pc-grade" textLength="94" lengthAdjust="spacingAndGlyphs">ROASTED LOTUS SEED · 24MM+</text>
+      <rect x="66" y="222" width="68" height="16" rx="2" fill="none" stroke="#B0501C" stroke-width=".9" stroke-dasharray="2 1.6"/>
+      <text x="100" y="232.5" text-anchor="middle" class="pc-stamp">ROAST WK 29</text>
+      <text x="24" y="200" class="pc-edge" transform="rotate(-90 24 200)">SHELF I</text>
+    </g>
+  </defs>
+</svg>
+
+<script src="collection.js" defer></script>
+</body>
+</html>

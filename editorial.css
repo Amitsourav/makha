@@ -1,0 +1,196 @@
+/* ═══════════════════════════════════════════════
+   स्वsnacks — Editorial system · House of Mithila + Standards
+   Quiet confidence. Type does everything.
+   ═══════════════════════════════════════════════ */
+
+.ed-body{ background:var(--cream); }
+
+/* ─── 1 · opening manifesto ─── */
+.manifesto-open{ padding:clamp(6rem,14vh,10rem) 0 clamp(5rem,10vh,7rem); }
+.mo__title{
+  font-family:var(--font-display); font-weight:400;
+  font-size:clamp(2.6rem, 6.4vw, 5.4rem); line-height:1.1; margin-top:1.4rem;
+}
+.mo__title span{ display:block; }
+.mo__title em{ font-style:italic; color:var(--cocoa); }
+.mo__sub{
+  margin-top:2rem; max-width:34rem; font-size:1.08rem; font-weight:300;
+  color:var(--ink-70); line-height:1.85;
+}
+
+/* ─── chapters ─── */
+.chapter{ padding:clamp(4.5rem,9vh,7rem) 0; }
+.chapter--tint{ background:var(--white); }
+.ch__grid{ display:grid; grid-template-columns:11rem 1fr; gap:3rem; align-items:start; }
+.ch__marker{ position:sticky; top:110px; }
+.ch__marker span{
+  display:block; font-family:var(--font-display); font-size:2rem; color:var(--ink-12); line-height:1;
+}
+.ch__marker b{
+  display:block; margin-top:.5rem; font-size:.68rem; letter-spacing:.24em;
+  text-transform:uppercase; font-weight:700; color:var(--copper);
+}
+.ch__marker--cream span{ color:rgba(248,244,238,.18); }
+.ch__marker--cream b{ color:var(--copper-2); }
+.ch__title{
+  font-family:var(--font-display); font-weight:400;
+  font-size:clamp(1.9rem, 3.6vw, 2.9rem); line-height:1.2; max-width:44rem;
+}
+.ch__title em{ font-style:italic; color:var(--cocoa); }
+.ch__prose{ margin-top:1.8rem; max-width:38rem; }
+.ch__prose p{ font-size:1.02rem; line-height:1.9; color:var(--ink-70); }
+.ch__prose p + p{ margin-top:1.3rem; }
+.ch__aside{
+  margin-top:2.4rem; max-width:34rem; font-size:.94rem; font-style:italic;
+  color:var(--cocoa); border-left:2px solid var(--copper-2); padding-left:1.2rem; line-height:1.8;
+}
+
+/* ─── 4 · the pond ─── */
+.pond{
+  position:relative; background:var(--espresso); color:var(--cream);
+  padding:clamp(5rem,10vh,8rem) 0; overflow:hidden;
+}
+.pond__rings{ position:absolute; inset:0; pointer-events:none; }
+.pond__rings i{
+  position:absolute; left:72%; top:38%; width:60px; height:60px;
+  border:1px solid rgba(201,165,120,.22); border-radius:50%;
+  transform:translate(-50%,-50%);
+  animation:ripple 9s var(--ease-lux) infinite;
+}
+.pond__rings i:nth-child(2){ animation-delay:3s; }
+.pond__rings i:nth-child(3){ animation-delay:6s; }
+@keyframes ripple{
+  0%{ transform:translate(-50%,-50%) scale(.4); opacity:0; }
+  12%{ opacity:1; }
+  100%{ transform:translate(-50%,-50%) scale(9); opacity:0; }
+}
+.pond__title{
+  font-family:var(--font-display); font-weight:400;
+  font-size:clamp(2rem, 4.2vw, 3.3rem); line-height:1.18; max-width:20em; margin-top:1.6rem;
+}
+.pond__title em{ font-style:italic; color:var(--copper-2); }
+.pond__moves{
+  display:grid; grid-template-columns:repeat(2,1fr); gap:0 3.5rem;
+  margin-top:3rem; max-width:62rem;
+}
+.pmove{ padding:1.8rem 0; border-top:1px solid var(--cream-14); }
+.pmove__k{
+  font-size:.68rem; letter-spacing:.24em; text-transform:uppercase; font-weight:700;
+  color:var(--copper-2); margin-bottom:.7rem;
+}
+.pmove p:last-child{ font-size:.96rem; line-height:1.85; color:var(--cream-70); }
+
+/* ─── 5 · credits ─── */
+.credits{
+  display:grid; grid-template-columns:repeat(2,1fr); gap:0 3rem; margin-top:2.2rem; max-width:44rem;
+}
+.credit{ padding:1.5rem 0; border-top:1px solid var(--ink-12); }
+.credit b{ font-family:var(--font-display); font-weight:400; font-size:1.15rem; }
+.credit p{ margin-top:.5rem; font-size:.9rem; line-height:1.75; color:var(--ink-50); }
+
+/* ─── 6 · philosophy ─── */
+.philo-ed{ background:var(--beige); padding:clamp(5rem,10vh,7.5rem) 0; }
+.philo-ed__lede{
+  font-family:var(--font-display); font-weight:400;
+  font-size:clamp(1.8rem, 3.4vw, 2.7rem); line-height:1.25; max-width:30em; margin-top:1.6rem;
+}
+.philo-ed__lede .deva{ color:var(--sindoor); }
+.philo-ed__lede em{ font-style:italic; color:var(--cocoa); }
+.philo-ed__grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:3rem;
+  border-top:1px solid var(--ink-12);
+}
+.pword{ padding:2.2rem 2.2rem 0 0; }
+.pword + .pword{ border-left:1px solid var(--ink-12); padding-left:2.2rem; }
+.pword__deva{
+  font-family:var(--font-display); font-size:clamp(2.2rem,3.4vw,3rem); line-height:1.15; color:var(--sindoor);
+}
+.pword__tr{
+  margin-top:.6rem; font-size:.7rem; letter-spacing:.22em; text-transform:uppercase;
+  font-weight:700; color:var(--copper);
+}
+.pword__body{ margin-top:1rem; font-size:.95rem; line-height:1.8; color:var(--ink-70); }
+
+/* ─── 8 · closing ─── */
+.closing{
+  background:var(--espresso); color:var(--cream); text-align:center;
+  padding:clamp(6rem,14vh,10rem) 0;
+}
+.closing__seal{
+  font-family:var(--font-display); font-size:2rem; color:var(--sindoor);
+}
+.closing__line{
+  font-family:var(--font-display); font-weight:400;
+  font-size:clamp(2rem, 4.6vw, 3.8rem); line-height:1.25; margin-top:1.6rem;
+}
+.closing__line span{ display:block; }
+.closing__line em{ font-style:italic; color:var(--copper-2); }
+.closing__sig{
+  margin-top:2.4rem; font-size:.72rem; letter-spacing:.3em; text-transform:uppercase;
+  font-weight:600; color:var(--copper-2);
+}
+
+/* ═══ STANDARDS — the rulebook ═══ */
+.rb-open{ padding:clamp(5rem,11vh,8rem) 0 clamp(2.5rem,5vh,4rem); }
+.rb__title{
+  font-family:var(--font-display); font-weight:400;
+  font-size:clamp(2.3rem, 5.2vw, 4.2rem); line-height:1.12; margin-top:1.2rem; max-width:16em;
+}
+.rb__title em{ font-style:italic; color:var(--cocoa); }
+.rb__sub{ margin-top:1.6rem; max-width:36rem; font-size:1.02rem; color:var(--ink-70); line-height:1.85; }
+
+.rulebook{ padding:0 0 clamp(5rem,10vh,7rem); }
+.rsec{ margin-top:3.2rem; }
+.rsec__head{
+  display:flex; align-items:baseline; gap:1.2rem;
+  border-bottom:1px solid var(--espresso); padding-bottom:.8rem;
+}
+.rsec__head span{ font-family:var(--font-display); font-size:1.3rem; color:var(--sindoor); }
+.rsec__head h2{
+  font-family:var(--font-display); font-weight:400; font-size:clamp(1.4rem,2.6vw,1.9rem);
+}
+.rules{ list-style:none; max-width:52rem; }
+.rules li{
+  display:flex; gap:1.4rem; align-items:baseline;
+  padding:1.05rem 0; border-bottom:1px solid var(--ink-12);
+  font-size:.98rem; line-height:1.75; color:var(--ink-70);
+}
+.rules li b{
+  font-family:var(--font-display); font-weight:400; font-size:.85rem;
+  color:var(--copper); flex:none; width:2.2rem;
+}
+.rb__close{
+  margin-top:3.5rem; max-width:36rem; font-size:.92rem; font-style:italic;
+  color:var(--cocoa); border-left:2px solid var(--copper-2); padding-left:1.2rem; line-height:1.8;
+}
+.rb__close a{ color:var(--sindoor); }
+
+.ed-footer{ padding:2rem 0; }
+.ed-footer .footer__base a{ color:var(--cream-70); }
+.ed-footer .footer__base a:hover{ color:var(--cream); }
+
+@media (prefers-reduced-motion: reduce){
+  .pond__rings{ display:none; }
+}
+
+/* ─── responsive ─── */
+@media (max-width: 1020px){
+  .ch__grid{ grid-template-columns:1fr; gap:1.2rem; }
+  .ch__marker{ position:static; display:flex; align-items:baseline; gap:.8rem; }
+  .ch__marker span{ font-size:1.4rem; }
+  .pond__moves{ grid-template-columns:1fr; }
+  .credits{ grid-template-columns:1fr; }
+  .philo-ed__grid{ grid-template-columns:1fr; }
+  .pword{ padding:1.8rem 0; }
+  .pword + .pword{ border-left:0; border-top:1px solid var(--ink-12); padding-left:0; }
+}
+
+/* future chapter — the shelf index */
+.shelfidx{ margin-top:2.4rem; max-width:38rem; border-top:1px solid var(--ink-12); }
+.shx{
+  display:grid; grid-template-columns:5.5rem 1fr auto; gap:1.2rem; align-items:baseline;
+  padding:.9rem 0; border-bottom:1px solid var(--ink-12);
+}
+.shx span{ font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; font-weight:700; color:var(--copper); }
+.shx b{ font-family:var(--font-display); font-weight:400; font-size:1.05rem; }
+.shx em{ font-style:normal; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; font-weight:600; color:var(--ink-50); }

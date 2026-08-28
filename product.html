@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>स्वsnacks — The Makhana Library</title>
+<meta name="description" content="Hand-graded 6-suta lawa makhana from the GI-tagged ponds of Mithila. Volume-numbered flavours, roasted weekly.">
+<meta name="theme-color" content="#F8F4EE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="pdp.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232C1D18'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='%23F8F4EE' font-family='serif'%3E%E0%A4%B8%E0%A5%8D%E0%A4%B5%3C/text%3E%3C/svg%3E">
+</head>
+<body class="pdp-body">
+
+<div class="announce"><p>Complimentary shipping over ₹999 · Every order ships from this week's roast</p></div>
+
+<header class="nav" id="nav">
+  <nav class="nav__inner" aria-label="Primary">
+    <a class="nav__brand" href="index.html" aria-label="स्वsnacks home">
+      <span class="nav__brand-deva">स्व</span><span class="nav__brand-latin">snacks</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="index.html#collections">Collections</a></li>
+      <li><a href="index.html#flavors">Flavours</a></li>
+      <li><a href="house-of-mithila.html">Our Story</a></li>
+      <li><a href="gifting.html">Gifting</a></li>
+    </ul>
+    <div class="nav__actions">
+      <a class="nav__cta" href="index.html#flavors">Shop</a>
+      <button class="nav__cart" id="cartBtn" aria-label="Open cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4.5 7.5h15l-1.2 12a1.5 1.5 0 0 1-1.5 1.35H7.2a1.5 1.5 0 0 1-1.5-1.35L4.5 7.5Z"/>
+          <path d="M8.5 7.5V6a3.5 3.5 0 0 1 7 0v1.5"/>
+        </svg>
+        <span class="nav__cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="pdp">
+
+  <!-- ═══ BUY HERO ═══ -->
+  <section class="buy">
+    <div class="container">
+      <nav class="crumb reveal" aria-label="Breadcrumb">
+        <a href="index.html">House</a><span>/</span><a href="collection.html">Shelf I — The Makhana Library</a><span>/</span><b id="crumbName">—</b>
+      </nav>
+      <div class="buy__grid">
+
+        <div class="gallery reveal d-1">
+          <div class="gallery__main" id="galleryMain" data-tilt>
+            <div class="gallery__view is-active" data-view="front">
+              <svg viewBox="0 0 200 296" class="gallery__svg">
+                <use href="#pouch-card"/>
+                <text x="100" y="158" text-anchor="middle" class="pc-flav" id="svgFlav" textLength="90" lengthAdjust="spacingAndGlyphs">—</text>
+                <rect x="36" y="244" width="128.5" height="26" id="svgBand" fill="#2E2A26"/>
+                <text x="46" y="264" class="pc-vol" id="svgVol" fill="#F8F4EE">No.—</text>
+                <text x="156" y="262" text-anchor="end" class="pc-wt" id="svgWt" fill="#F8F4EE">80g</text>
+              </svg>
+            </div>
+            <div class="gallery__view" data-view="back">
+              <svg viewBox="0 0 200 296" class="gallery__svg">
+                <use href="#pouch-back"/>
+                <text x="100" y="118" text-anchor="middle" class="pb-ing" id="svgIng1">—</text>
+                <text x="100" y="132" text-anchor="middle" class="pb-ing" id="svgIng2">—</text>
+                <text x="100" y="146" text-anchor="middle" class="pb-ing" id="svgIng3">—</text>
+              </svg>
+            </div>
+            <div class="gallery__view" data-view="jar">
+              <svg viewBox="0 0 200 280" class="gallery__svg">
+                <use href="#jar-glass-lg"/>
+                <rect x="56" y="178" width="88" height="6" id="svgJarBand" fill="#2E2A26"/>
+              </svg>
+            </div>
+          </div>
+          <div class="gallery__thumbs" role="tablist" aria-label="Product views">
+            <button class="gallery__thumb is-active" data-view="front" aria-label="Front of pack">Front</button>
+            <button class="gallery__thumb" data-view="back" aria-label="Back of pack">The honest side</button>
+            <button class="gallery__thumb" data-view="jar" aria-label="Glass jar">The jar</button>
+          </div>
+          <p class="gallery__note">Rendered from the locked packaging system · photography arrives with the launch batch</p>
+        </div>
+
+        <div class="buybox reveal d-2">
+          <p class="buybox__vol" id="volLine">Vol. No.— · —</p>
+          <h1 class="buybox__name" id="prodName">—</h1>
+          <p class="buybox__mood" id="prodMood">—</p>
+          <a class="buybox__rating" href="#reviews" id="ratingLine">★★★★★ <span>— · — reviews</span></a>
+
+          <div class="buybox__price">
+            <p class="buybox__amount" id="priceNow">₹—</p>
+            <p class="buybox__per" id="pricePer">—</p>
+          </div>
+
+          <fieldset class="opt" id="formatOpts">
+            <legend class="opt__label">Format</legend>
+          </fieldset>
+
+          <fieldset class="opt">
+            <legend class="opt__label">Purchase</legend>
+            <div class="plan" id="planOpts">
+              <label class="plan__item is-active" data-plan="once">
+                <input type="radio" name="plan" value="once" checked>
+                <b>One-time</b><span>Ships from this week's roast</span>
+              </label>
+              <label class="plan__item" data-plan="standing">
+                <input type="radio" name="plan" value="standing">
+                <b>Standing Order <em id="saveTag">−15%</em></b><span>Every 4 weeks · pause or cancel in two taps</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="buybox__row">
+            <div class="qty" aria-label="Quantity">
+              <button id="qtyDec" aria-label="Decrease quantity">−</button>
+              <span id="qtyVal">1</span>
+              <button id="qtyInc" aria-label="Increase quantity">+</button>
+            </div>
+            <button class="btn btn--dark buybox__atc" id="atcBtn">Add to cart — ₹—</button>
+          </div>
+
+          <ul class="chips">
+            <li><span class="pulse"></span>Roast No. 29 ships Friday</li>
+            <li>30-day taste guarantee</li>
+            <li>Free shipping over ₹999</li>
+          </ul>
+          <p class="buybox__legal">GI-tagged Mithila Makhana · FSSAI certified · Nitrogen-sealed on roast day</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TASTE ═══ -->
+  <section class="taste">
+    <div class="container taste__grid">
+      <div>
+        <p class="eyebrow eyebrow--copper reveal">The taste</p>
+        <h2 class="section-title reveal d-1" id="tasteTitle">—</h2>
+        <p class="taste__story reveal d-2" id="tasteStory">—</p>
+        <p class="taste__serve reveal d-3" id="tasteServe">—</p>
+      </div>
+      <div class="notes reveal d-2" id="notesWrap" aria-label="Tasting notes"></div>
+    </div>
+  </section>
+
+  <!-- ═══ INGREDIENTS ═══ -->
+  <section class="ings">
+    <div class="container">
+      <p class="eyebrow reveal">Read in one breath</p>
+      <h2 class="section-title section-title--cream reveal d-1">Everything <em>inside.</em></h2>
+      <ol class="ings__list" id="ingList"></ol>
+      <p class="ings__none reveal">— and nothing else. No palm oil, no maltodextrin, no "nature-identical" anything.</p>
+    </div>
+  </section>
+
+  <!-- ═══ THE GRADE ═══ -->
+  <section class="grade">
+    <div class="container grade__grid">
+      <svg viewBox="0 0 300 300" class="grade__rings reveal" aria-hidden="true">
+        <circle cx="150" cy="160" r="38" class="gr gr--dim"/>
+        <circle cx="150" cy="160" r="70" class="gr gr--mid"/>
+        <circle cx="150" cy="160" r="104" class="gr gr--hero"/>
+        <text x="150" y="165" text-anchor="middle" class="gr-label">12mm</text>
+        <text x="150" y="84" text-anchor="middle" class="gr-label gr-label--mid">18mm</text>
+        <text x="150" y="46" text-anchor="middle" class="gr-label gr-label--hero">24mm+ · स्व grade</text>
+      </svg>
+      <div>
+        <p class="eyebrow eyebrow--copper reveal">The standard</p>
+        <h2 class="section-title reveal d-1">Only one seed in <em>fourteen</em> makes it.</h2>
+        <p class="grade__body reveal d-2">Every volume in the library is graded thrice to the old Mithila measure — <strong>6-suta lawa</strong>, over 24 millimetres, hand-popped at the pond's edge and nitrogen-sealed the day it is seasoned. The rejects become bird feed, not your snack.</p>
+        <a class="link-arrow reveal d-3" href="index.html#why">Why we hold this standard →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ REVIEWS ═══ -->
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow eyebrow--copper reveal">In good company</p>
+          <h2 class="section-title reveal d-1" id="revTitle">— reviews. <em>—</em> kept.</h2>
+        </div>
+      </div>
+      <div class="reviews__grid">
+        <aside class="revsum reveal">
+          <p class="revsum__big" id="revBig">—</p>
+          <p class="stars" id="revStars">★★★★★</p>
+          <p class="revsum__n" id="revCount">— verified reviews</p>
+          <div class="revsum__bars" id="revBars"></div>
+        </aside>
+        <div class="revcards" id="revCards"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ COMPLETE THE SHELF ═══ -->
+  <section class="shelf">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow eyebrow--copper reveal">Complete the shelf</p>
+          <h2 class="section-title reveal d-1">The other <em>volumes.</em></h2>
+        </div>
+        <p class="section-note reveal d-2">Free shipping unlocks at ₹999 — most shelves get there in three tins.</p>
+      </div>
+      <div class="shelf__rail" id="shelfRail"></div>
+    </div>
+  </section>
+
+  <!-- ═══ PDP FAQ ═══ -->
+  <section class="pdp-faq">
+    <div class="container pdp-faq__inner">
+      <h2 class="section-title reveal">The fine print, in <em>plain</em> ink.</h2>
+      <div>
+        <details class="faq__item reveal"><summary>How fresh is this when it arrives?</summary><p>It ships from the current week's roast — never warehouse stock. The roast date is stamped on the base, and crispness holds 45 days after opening if resealed.</p></details>
+        <details class="faq__item reveal d-1"><summary>What if I don't love it?</summary><p>Tell us within 30 days and your first order is refunded in full — no return shipping, no questionnaire. Fewer than 1 in 200 customers ever ask.</p></details>
+        <details class="faq__item reveal d-2"><summary>How does the Standing Order work?</summary><p>15% off every delivery, shipped every four weeks from that week's roast. Pause, swap flavours or cancel from a link in any email — two taps, no calls.</p></details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ STICKY PURCHASE BAR ═══ -->
+<div class="stickybar" id="stickyBar" aria-hidden="true">
+  <div class="stickybar__inner">
+    <span class="stickybar__dot" id="stickyDot"></span>
+    <div class="stickybar__meta">
+      <b id="stickyName">—</b>
+      <span id="stickyPrice">₹—</span>
+    </div>
+    <button class="btn btn--dark stickybar__btn" id="stickyAtc">Add to cart</button>
+  </div>
+</div>
+
+<footer class="footer pdp-footer">
+  <div class="container">
+    <div class="footer__base">
+      <p>© 2026 स्वsnacks · Makhana House of Mithila</p>
+      <p><a href="index.html">Home</a> · <a href="index.html#faq">FAQ</a> · <a href="mailto:namaste@svasnacks.in">namaste@svasnacks.in</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ CART (shared state with homepage) ═══ -->
+<div class="cart-scrim" id="cartScrim"></div>
+<aside class="cart" id="cart" aria-label="Shopping cart">
+  <div class="cart__head"><h2>Your tins</h2><button class="cart__close" id="cartClose" aria-label="Close cart">✕</button></div>
+  <div class="cart__body" id="cartBody"><p class="cart__empty">Your cart is empty — for now.</p></div>
+  <div class="cart__foot">
+    <div class="cart__ship" id="cartShip">Free shipping unlocks at ₹999</div>
+    <div class="cart__total"><span>Subtotal</span><span id="cartTotal">₹0</span></div>
+    <button class="btn btn--dark cart__checkout">Checkout →</button>
+    <p class="cart__note">30-day taste guarantee · Ships from this week's roast</p>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ═══ SVG DEFS ═══ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lidMetal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8C6844"/><stop offset=".5" stop-color="#C9A578"/><stop offset="1" stop-color="#8C6844"/>
+    </linearGradient>
+    <linearGradient id="bodyShade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".25"/><stop offset=".2" stop-color="#000" stop-opacity="0"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity=".16"/><stop offset=".85" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".28"/>
+    </linearGradient>
+
+    <g id="pouch-card">
+      <ellipse cx="100" cy="284" rx="66" ry="7" fill="#2C1D18" opacity=".14"/>
+      <path d="M42 40 Q38 26 50 26 L150 26 Q162 26 158 40 L164 258 Q165 278 144 278 L56 278 Q35 278 36 258 Z" fill="#2C1D18"/>
+      <path d="M42 40 Q38 26 50 26 L150 26 Q162 26 158 40 L164 258 Q165 278 144 278 L56 278 Q35 278 36 258 Z" fill="url(#bodyShade)" opacity=".5"/>
+      <rect x="46" y="32" width="108" height="8" rx="3" fill="#4A362B"/>
+      <circle cx="100" cy="66" r="17" fill="none" stroke="#A97C50" stroke-width="1"/>
+      <text x="100" y="71" text-anchor="middle" class="pc-seal">स्व</text>
+      <rect x="52" y="96" width="96" height="118" rx="5" fill="#F8F4EE"/>
+      <g fill="none" stroke="#2C1D18" stroke-width="1.5" transform="translate(100,112)">
+        <circle r="6.5"/><path d="M-4 -2 a6.5 6.5 0 0 1 8 0"/><circle cx="8" cy="-6" r="2.2"/>
+      </g>
+      <text x="100" y="140" text-anchor="middle" class="pc-cat">MAKHANA</text>
+      <line x1="72" y1="168" x2="128" y2="168" stroke="#2C1D18" stroke-width=".6" opacity=".3"/>
+      <text x="100" y="182" text-anchor="middle" class="pc-grade" textLength="94" lengthAdjust="spacingAndGlyphs">ROASTED LOTUS SEED · 24MM+</text>
+      <rect x="66" y="222" width="68" height="16" rx="2" fill="none" stroke="#B0501C" stroke-width=".9" stroke-dasharray="2 1.6"/>
+      <text x="100" y="232.5" text-anchor="middle" class="pc-stamp">ROAST WK 29</text>
+      <text x="24" y="200" class="pc-edge" transform="rotate(-90 24 200)">SHELF I</text>
+    </g>
+
+    <g id="pouch-back">
+      <ellipse cx="100" cy="284" rx="66" ry="7" fill="#2C1D18" opacity=".12"/>
+      <path d="M42 40 Q38 26 50 26 L150 26 Q162 26 158 40 L164 258 Q165 278 144 278 L56 278 Q35 278 36 258 Z" fill="#F8F4EE"/>
+      <path d="M42 40 Q38 26 50 26 L150 26 Q162 26 158 40 L164 258 Q165 278 144 278 L56 278 Q35 278 36 258 Z" fill="none" stroke="#2C1D18" stroke-opacity=".25"/>
+      <rect x="46" y="32" width="108" height="8" rx="3" fill="#E6DBC9"/>
+      <text x="100" y="62" text-anchor="middle" class="pb-head">THE STANDARD</text>
+      <rect x="58" y="70" width="84" height="22" rx="2" fill="#EFE7DA"/>
+      <text x="100" y="104" text-anchor="middle" class="pb-title">INGREDIENTS</text>
+      <rect x="58" y="158" width="84" height="34" rx="2" fill="#EFE7DA"/>
+      <text x="100" y="178" text-anchor="middle" class="pb-micro">NUTRITION · TABULAR</text>
+      <rect x="60" y="202" width="34" height="34" rx="2" fill="none" stroke="#A97C50"/>
+      <text x="77" y="222" text-anchor="middle" class="pb-micro" style="font-size:4.6px">QR · POND</text>
+      <text x="122" y="214" text-anchor="middle" class="pb-micro">POND No.4</text>
+      <text x="122" y="226" text-anchor="middle" class="pb-micro">ROAST WK 29</text>
+      <text x="100" y="258" text-anchor="middle" class="pb-micro" style="font-size:4.4px">FSSAI · GI-TAGGED MITHILA MAKHANA · MRP · BATCH</text>
+    </g>
+
+    <g id="jar-glass-lg">
+      <ellipse cx="100" cy="266" rx="66" ry="8" fill="#2C1D18" opacity=".15" style="filter:blur(5px)"/>
+      <rect x="42" y="66" width="116" height="198" rx="20" fill="#FFFFFF" opacity=".55"/>
+      <rect x="42" y="66" width="116" height="198" rx="20" fill="none" stroke="#2C1D18" stroke-width="1.4" opacity=".55"/>
+      <path d="M52 76 q0 90 0 178" stroke="#fff" stroke-width="7" opacity=".5" fill="none" stroke-linecap="round"/>
+      <g fill="#EFE5D3">
+        <circle cx="70" cy="232" r="10"/><circle cx="94" cy="240" r="11"/><circle cx="120" cy="234" r="10"/>
+        <circle cx="138" cy="242" r="8"/><circle cx="80" cy="212" r="9"/><circle cx="108" cy="214" r="10"/>
+        <circle cx="132" cy="210" r="8"/><circle cx="64" cy="250" r="8"/><circle cx="118" cy="252" r="9"/><circle cx="92" cy="256" r="8"/>
+      </g>
+      <g fill="#EFE5D3"><circle cx="74" cy="96" r="8"/><circle cx="100" cy="102" r="9"/><circle cx="127" cy="97" r="8"/></g>
+      <rect x="38" y="38" width="124" height="28" rx="9" fill="#2C1D18"/>
+      <rect x="56" y="128" width="88" height="56" rx="4" fill="#F8F4EE" stroke="#2C1D18" stroke-opacity=".12"/>
+      <text x="100" y="156" text-anchor="middle" class="pack-deva pack-deva--sm">स्व</text>
+      <text x="100" y="174" text-anchor="middle" class="pack-micro">MAKHANA</text>
+    </g>
+  </defs>
+</svg>
+
+<script src="pdp.js" defer></script>
+</body>
+</html>

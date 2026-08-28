@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gifting — स्वsnacks · The gift that replaces mithai</title>
+<meta name="description" content="Letterpressed gift boxes of hand-graded Mithila makhana. Build your own box, add a hand-set note, or plan corporate gifting with GST invoicing.">
+<meta name="theme-color" content="#F8F4EE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="gifting.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232C1D18'/%3E%3Ctext x='32' y='44' font-size='30' text-anchor='middle' fill='%23F8F4EE' font-family='serif'%3E%E0%A4%B8%E0%A5%8D%E0%A4%B5%3C/text%3E%3C/svg%3E">
+</head>
+<body class="gift-body">
+
+<div class="announce"><p>Complimentary shipping over ₹999 · Every order ships from this week's roast</p></div>
+
+<header class="nav" id="nav">
+  <nav class="nav__inner" aria-label="Primary">
+    <a class="nav__brand" href="index.html" aria-label="स्वsnacks home">
+      <span class="nav__brand-deva">स्व</span><span class="nav__brand-latin">snacks</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="collection.html">Collections</a></li>
+      <li><a href="index.html#flavors">Flavours</a></li>
+      <li><a href="house-of-mithila.html">Our Story</a></li>
+      <li><a href="gifting.html" aria-current="page">Gifting</a></li>
+    </ul>
+    <div class="nav__actions">
+      <a class="nav__cta" href="#builder">Build a box</a>
+      <button class="nav__cart" id="cartBtn" aria-label="Open cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4.5 7.5h15l-1.2 12a1.5 1.5 0 0 1-1.5 1.35H7.2a1.5 1.5 0 0 1-1.5-1.35L4.5 7.5Z"/>
+          <path d="M8.5 7.5V6a3.5 3.5 0 0 1 7 0v1.5"/>
+        </svg>
+        <span class="nav__cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="gift">
+
+  <!-- ═══ GIFT HERO ═══ -->
+  <section class="ghero">
+    <div class="container ghero__grid">
+      <div>
+        <p class="eyebrow eyebrow--copper reveal">Festive &amp; corporate gifting</p>
+        <h1 class="ghero__title reveal d-1">The gift that <em>replaces</em> mithai.</h1>
+        <p class="ghero__lede reveal d-2">Letterpressed boxes, volumes arranged spine-out like first editions, a hand-set note, and a card naming the pond your seeds came from. For Diwali, weddings, and boardrooms that notice details.</p>
+        <div class="ghero__actions reveal d-3">
+          <a class="btn btn--dark" href="#builder">Build your box</a>
+          <a class="btn btn--ghost" href="#corporate">Corporate gifting</a>
+        </div>
+        <div class="ghero__meta reveal d-4">
+          <span>Dispatch in 2 working days</span><span class="dot-div"></span>
+          <span>Insured shipping, nationwide</span><span class="dot-div"></span>
+          <span>Prices never shown in the box</span>
+        </div>
+      </div>
+      <div class="ghero__visual reveal d-2" aria-hidden="true">
+        <div class="giftbox open">
+          <svg viewBox="0 0 220 90" class="giftbox__lid"><use href="#gift-lid"/></svg>
+          <svg viewBox="0 0 220 130" class="giftbox__base"><use href="#gift-base"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ OCCASIONS ═══ -->
+  <section class="occasions">
+    <div class="container">
+      <div class="occ__grid">
+        <article class="occ reveal">
+          <p class="occ__k">Diwali &amp; festivals</p>
+          <h2>The expected gift, upgraded.</h2>
+          <p>Copper-foil geometry, no clichés. The box that ends the soan papdi cycle in your building — order by the Tuesday before Diwali week.</p>
+        </article>
+        <article class="occ reveal d-1">
+          <p class="occ__k">Weddings &amp; homes</p>
+          <h2>For houses that host.</h2>
+          <p>The Tasting Library, spine-out on a shelf, keeps working long after the wedding — the box is designed to be kept, not discarded.</p>
+        </article>
+        <article class="occ reveal d-2">
+          <p class="occ__k">Thank-yous</p>
+          <h2>Gratitude with a grade.</h2>
+          <p>A Trio box with a hand-set note says more than flowers, lasts longer, and costs less than you'd guess. The note does the talking.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BUILD-A-BOX ═══ -->
+  <section class="builder" id="builder">
+    <div class="container">
+      <p class="eyebrow eyebrow--copper reveal">Build a box</p>
+      <h2 class="section-title reveal d-1">Fill the shelf <em>yourself.</em></h2>
+      <p class="builder__lede reveal d-2">Choose a box, pick your volumes, write the note. We letterpress, ribbon, and dispatch from this week's roast.</p>
+
+      <div class="builder__grid">
+        <div class="builder__left reveal d-2">
+
+          <fieldset class="opt">
+            <legend class="opt__label">The box</legend>
+            <div class="sizes" id="sizeOpts">
+              <button class="size is-active" data-size="3" data-price="1149">
+                <b>The Trio</b><span>3 volumes · ₹1,149</span>
+              </button>
+              <button class="size" data-size="6" data-price="1999">
+                <b>The Tasting Library</b><span>6 volumes · ₹1,999</span>
+              </button>
+            </div>
+          </fieldset>
+
+          <fieldset class="opt">
+            <legend class="opt__label">The volumes <span class="opt__hint" id="slotHint">— pick 3</span></legend>
+            <div class="spines" id="spines" aria-live="polite"></div>
+            <div class="picker" id="picker"></div>
+          </fieldset>
+
+          <fieldset class="opt">
+            <legend class="opt__label">The note <span class="opt__hint">— hand-set in the card</span></legend>
+            <textarea id="noteInput" class="note-input" maxlength="140" rows="3" placeholder="For the house that always feeds everyone else…"></textarea>
+            <div class="notecard" aria-hidden="true">
+              <p class="notecard__deva">स्व</p>
+              <p class="notecard__text" id="notePreview">Your note, letterpressed here.</p>
+              <p class="notecard__rule"></p>
+              <p class="notecard__from">The Makhana House of Mithila</p>
+            </div>
+          </fieldset>
+        </div>
+
+        <aside class="summary reveal d-3">
+          <h3 class="summary__title" id="sumName">The Trio</h3>
+          <ul class="summary__list" id="sumList"><li class="summary__empty">No volumes chosen yet.</li></ul>
+          <div class="summary__row"><span>Letterpress box, ribbon &amp; card</span><b>Included</b></div>
+          <div class="summary__row" id="sumSave" hidden><span>Versus buying the tins alone</span><b id="sumSaveAmt">—</b></div>
+          <label class="summary__opt"><input type="checkbox" id="hidePrices" checked> No prices anywhere in the box</label>
+          <label class="summary__opt summary__opt--date">Deliver on or after
+            <input type="date" id="giftDate" aria-label="Delivery date">
+          </label>
+          <div class="summary__total"><span>Total</span><b id="sumTotal">₹1,149</b></div>
+          <button class="btn btn--dark summary__atc" id="giftAtc" disabled>Pick your volumes</button>
+          <p class="summary__note">30-day taste guarantee · insured shipping · dispatch in 2 working days</p>
+        </aside>
+      </div>
+
+      <aside class="hamper reveal">
+        <div>
+          <p class="eyebrow eyebrow--copper">The Reserve Hamper</p>
+          <h3>Everything, and the jars.</h3>
+          <p>All six volumes, two glass jars of the house salt &amp; ghee, and the provenance folio — our largest gesture, boxed.</p>
+        </div>
+        <div class="hamper__buy">
+          <p class="hamper__price">₹3,499</p>
+          <button class="btn-add hamper__btn" data-name="The Reserve Hamper" data-price="3499" data-fc="#C9A578">Add the hamper</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ═══ PRESENTATION / TRUST ═══ -->
+  <section class="present">
+    <div class="container">
+      <p class="eyebrow reveal">The presentation</p>
+      <h2 class="section-title section-title--cream reveal d-1">What arrives is <em>an object.</em></h2>
+      <div class="present__grid">
+        <div class="pitem reveal"><b>Letterpress &amp; ribbon</b><p>Cream board, blind-debossed seal, sindoor ribbon pull. No plastic sleeve, ever.</p></div>
+        <div class="pitem reveal d-1"><b>The library card</b><p>Your note, hand-set in a pocket inside the lid — the way libraries used to sign books out.</p></div>
+        <div class="pitem reveal d-2"><b>The provenance card</b><p>Names the pond, the grade, and the roast week of every volume in the box.</p></div>
+        <div class="pitem reveal d-3"><b>Insured, tracked</b><p>Nationwide in 2–5 days, insured door to door. If a tin arrives less than perfect, we replace the box.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CORPORATE ═══ -->
+  <section class="corp" id="corporate">
+    <div class="container corp__grid">
+      <div>
+        <p class="eyebrow eyebrow--copper reveal">Corporate gifting</p>
+        <h2 class="section-title reveal d-1">For boardrooms that <em>notice.</em></h2>
+        <p class="corp__lede reveal d-2">Co-branded cards, GST invoicing, staggered dispatch to multiple addresses, and a single human who owns your order end to end. No portals, no ticket numbers.</p>
+        <ul class="corp__chips reveal d-3">
+          <li>GST invoice</li><li>Co-branded note cards</li><li>Multi-address dispatch</li><li>Dispatch in 5 working days</li>
+        </ul>
+        <a class="btn btn--dark reveal d-4" href="mailto:gifting@svasnacks.in?subject=Corporate%20gifting%20enquiry%20—%20स्वsnacks&body=Company%3A%0AQuantity%20band%3A%0AOccasion%20%2F%20date%3A%0ADelivery%20city%2Fcities%3A%0A">Write to the gifting desk</a>
+        <p class="corp__reply reveal d-4">gifting@svasnacks.in · a human replies within one working day</p>
+      </div>
+      <div class="corp__table reveal d-2">
+        <div class="crow crow--head"><span>Boxes</span><span>Per box</span><span>Includes</span></div>
+        <div class="crow"><span>25–99</span><b>₹1,899</b><span>Tasting Library + co-branded card</span></div>
+        <div class="crow"><span>100–499</span><b>₹1,799</b><span>+ logo foil on the box sleeve</span></div>
+        <div class="crow"><span>500+</span><b>Custom</b><span>+ bespoke flavour edition, named for you</span></div>
+        <p class="corp__fine">Pricing indicative for the Tasting Library configuration · final quote with GST on enquiry</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GIFT FAQ ═══ -->
+  <section class="gfaq">
+    <div class="container gfaq__inner">
+      <h2 class="section-title reveal">The fine print, in <em>plain</em> ink.</h2>
+      <div>
+        <details class="faq__item reveal"><summary>When should I order for Diwali?</summary><p>Ten days before Diwali week guarantees delivery anywhere in India. After that, metro addresses usually still make it — the gifting desk will tell you honestly before you pay.</p></details>
+        <details class="faq__item reveal d-1"><summary>How is the note printed?</summary><p>It isn't — it is hand-set and letterpressed onto the library card, up to 140 characters. Write it the way you'd say it; the card does the rest.</p></details>
+        <details class="faq__item reveal d-2"><summary>Can the recipient see prices?</summary><p>Never, unless you untick the box. No invoice, no price tags, no barcodes inside — the paperwork comes to you, the object goes to them.</p></details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer gift-footer">
+  <div class="container">
+    <div class="footer__base">
+      <p>© 2026 स्वsnacks · Makhana House of Mithila</p>
+      <p><a href="index.html">Home</a> · <a href="collection.html">The Library</a> · <a href="mailto:gifting@svasnacks.in">gifting@svasnacks.in</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ CART ═══ -->
+<div class="cart-scrim" id="cartScrim"></div>
+<aside class="cart" id="cart" aria-label="Shopping cart">
+  <div class="cart__head"><h2>Your tins</h2><button class="cart__close" id="cartClose" aria-label="Close cart">✕</button></div>
+  <div class="cart__body" id="cartBody"><p class="cart__empty">Your cart is empty — for now.</p></div>
+  <div class="cart__foot">
+    <div class="cart__ship" id="cartShip">Free shipping unlocks at ₹999</div>
+    <div class="cart__total"><span>Subtotal</span><span id="cartTotal">₹0</span></div>
+    <button class="btn btn--dark cart__checkout">Checkout →</button>
+    <p class="cart__note">30-day taste guarantee · Ships from this week's roast</p>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ═══ SVG DEFS ═══ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="bodyShade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".25"/><stop offset=".2" stop-color="#000" stop-opacity="0"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity=".16"/><stop offset=".85" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".28"/>
+    </linearGradient>
+    <g id="gift-base">
+      <ellipse cx="110" cy="118" rx="92" ry="8" fill="#2C1D18" opacity=".16" style="filter:blur(5px)"/>
+      <rect x="24" y="10" width="172" height="104" rx="6" fill="#2C1D18"/>
+      <rect x="24" y="10" width="172" height="104" rx="6" fill="url(#bodyShade)" opacity=".4"/>
+      <rect x="100" y="10" width="20" height="104" fill="#B0501C"/>
+      <text x="62" y="70" text-anchor="middle" class="gd" style="font-family:'Rozha One';font-size:26px;fill:#C9A578">स्व</text>
+      <text x="158" y="62" text-anchor="middle" class="gm">THE TASTING</text>
+      <text x="158" y="76" text-anchor="middle" class="gm">LIBRARY</text>
+    </g>
+    <g id="gift-lid">
+      <rect x="14" y="24" width="192" height="40" rx="6" fill="#3B2A1E"/>
+      <rect x="14" y="24" width="192" height="40" rx="6" fill="url(#bodyShade)" opacity=".4"/>
+      <rect x="98" y="24" width="24" height="40" fill="#B0501C"/>
+      <path d="M110 24 q-12 -18 -22 -6 q-6 8 10 8 Z M110 24 q12 -18 22 -6 q6 8 -10 8 Z" fill="#B0501C"/>
+    </g>
+  </defs>
+</svg>
+
+<script src="gifting.js" defer></script>
+</body>
+</html>
