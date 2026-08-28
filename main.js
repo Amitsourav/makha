@@ -29,10 +29,15 @@ addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40),
   const BASE = [239, 231, 218];
   let w, h, mx = 0, my = 0, tmx = 0, tmy = 0, scrollP = 0, running = true;
 
+  // Piece radius is authored for a desktop field. Held at that size on a
+  // phone the spheres crowd the headline instead of sitting behind it, so
+  // scale with the viewport — floored at .5 so they stay legible as objects.
+  const RSCALE = Math.max(.5, Math.min(1, innerWidth / 1100));
+
   const rnd = (a, b) => a + Math.random() * (b - a);
   const pieces = Array.from({ length: COUNT }, () => ({
     x: Math.random(), y: Math.random(),
-    r: rnd(10, 34), z: rnd(.25, 1),           // z = depth: nearer moves more
+    r: rnd(10, 34) * RSCALE, z: rnd(.25, 1),  // z = depth: nearer moves more
     vx: rnd(-.012, .012), vy: rnd(-.008, .008),
     rot: rnd(0, Math.PI * 2), vr: rnd(-.0012, .0012),
     tint: Math.floor(Math.random() * TINTS.length),

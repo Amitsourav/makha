@@ -731,3 +731,101 @@ body::after{
   .story__words{ min-height:13rem; }
   .story__ctas .btn{ padding:.9rem 1.6rem; font-size:.74rem; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE LAYER
+   Appended last so it refines the 1020/700 breakpoints above rather
+   than replacing them. Principle from 07-motion-spec §7: mobile
+   premium = the OS feeling untouched. Nothing here changes desktop.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* --- 1. Nothing may ever overflow the viewport ------------------- */
+html, body{ max-width:100%; }
+/* Long unbroken strings (URLs, emails in the footer) must not push
+   the page wide on a 320px phone. */
+p, li, h1, h2, h3, h4, a, td, th{ overflow-wrap:break-word; }
+
+/* --- 2. Horizontal rails: make "scrollable" legible --------------
+   .nav__links, .moodbar__chips and .index__rail are already
+   overflow-x:auto, so content past the edge is swipeable — but with a
+   hard cut it reads as broken layout. A sticky fade at the trailing
+   edge says "there is more here" without adding chrome. Momentum
+   scrolling and snap keep it feeling native. */
+.nav__links, .moodbar__chips, .index__rail{
+  -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x proximity;
+  scroll-padding-inline:1rem;
+  overscroll-behavior-x:contain;
+}
+.nav__links > li, .moodbar__chips > *, .index__rail > *{ scroll-snap-align:start; }
+
+@media (max-width: 1020px){
+  /* fade the trailing edge of the nav rail */
+  .nav__links{
+    -webkit-mask-image:linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    mask-image:linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  }
+}
+
+/* --- 3. Phones: fit the nav where it can fit --------------------- */
+@media (max-width: 560px){
+  .nav__inner{ gap:.75rem; }
+  .nav__links{ gap:1.15rem; }
+  .nav__links a{ font-size:.68rem; letter-spacing:.1em; }
+  .nav__brand{ font-size:1.35rem; }
+  .nav__brand-deva{ font-size:1.55rem; }
+  .nav__cta{ padding:.55rem 1.05rem; font-size:.7rem; }
+}
+
+/* --- 4. Small phones (≤400): tighten the gutter ------------------ */
+@media (max-width: 400px){
+  :root{ --w: min(1240px, 94vw); }
+  .announce p{ font-size:.72rem; }
+  .hero__proof{ gap:.5rem .8rem; font-size:.74rem; }
+  /* the "·" separators cost a line of their own at this width */
+  .hero__proof > span[aria-hidden="true"]{ display:none; }
+  .trustbar{ gap:.7rem 1.4rem; font-size:.68rem; padding:1.1rem; }
+}
+
+/* --- 5. Footer newsletter form ----------------------------------
+   flex:1 on the input has no min-width, so below ~360px the input's
+   intrinsic size pushed the form past the viewport. */
+.footer__form{ flex-wrap:wrap; }
+.footer__form input{ min-width:0; flex:1 1 12rem; }
+@media (max-width: 430px){
+  .footer__form{ gap:.6rem; }
+  .footer__form input, .footer__form .btn{ flex:1 1 100%; width:100%; }
+  .footer__cols{ grid-template-columns:repeat(2, 1fr); gap:1.6rem; }
+}
+@media (max-width: 340px){
+  .footer__cols{ grid-template-columns:1fr; }
+}
+
+/* --- 6. Touch targets -------------------------------------------
+   WCAG 2.5.8 asks for 24px minimum; 44px is the comfortable thumb
+   target Apple and Google both specify. Applies only where a pointer
+   is coarse, so desktop density is untouched. */
+@media (hover: none){
+  .nav__cart, .faq__item summary, .qty button, .chip, .ix,
+  .cart__close, .cart__item-qty button{
+    min-height:44px; min-width:44px;
+  }
+  .faq__item summary{ display:flex; align-items:center; }
+}
+
+/* --- 7. Short/landscape viewports -------------------------------
+   A phone in landscape is ~390px tall. A 100svh hero would bury the
+   headline and the CTA below the fold with no way to see both. */
+@media (max-height: 520px) and (orientation: landscape){
+  .hero{ min-height:auto; padding-block:3.5rem 2.5rem; }
+  .hero__stamp{ display:none; }
+  .story{ min-height:auto; }
+}
+
+/* --- 8. Very large screens --------------------------------------
+   --w caps at 1240px, so on a 27" display the page is a narrow ribbon
+   in a wide field. Let the measure grow a little without losing the
+   line-length discipline. */
+@media (min-width: 1800px){
+  :root{ --w: min(1440px, 88vw); }
+}

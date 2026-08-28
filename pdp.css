@@ -280,3 +280,22 @@
 .pb-title{ font-family:var(--font-display); font-size:11px; fill:#2C1D18; }
 .pb-ing{ font-family:var(--font-display); font-size:7.5px; fill:#5C4033; }
 .pb-micro{ font-family:var(--font-body); font-size:5.2px; letter-spacing:1.2px; fill:#2C1D18; opacity:.55; font-weight:600; }
+
+/* ─── responsive refinements ─── */
+@media (max-width: 560px){
+  /* flex:1 forces four equal pills, so the longest label ("The honest
+     side") wraps to three lines and the row goes ragged. Let the pills
+     size to their content and scroll instead — same swipe grammar as
+     the mood chips on the collection page. */
+  .gallery__thumbs{
+    gap:.45rem; overflow-x:auto; scrollbar-width:none;
+    scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+    -webkit-mask-image:linear-gradient(to right, #000 calc(100% - 24px), transparent);
+    mask-image:linear-gradient(to right, #000 calc(100% - 24px), transparent);
+  }
+  .gallery__thumbs::-webkit-scrollbar{ display:none; }
+  .gallery__thumb{
+    flex:0 0 auto; white-space:nowrap; scroll-snap-align:start;
+    padding:.6rem 1rem; font-size:.68rem; letter-spacing:.08em;
+  }
+}
