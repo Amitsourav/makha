@@ -244,6 +244,14 @@ function initMotion() {
   // Driven through a tween so scrub smoothing is real (it only smooths
   // attached animations, not raw progress reads).
   const state = { x: 0.5 };
+  // On phones the chapter figures animate opacity ONLY. Each one is a
+  // full-viewport SVG wrapping a ~1.5MP raster, and a per-frame scale()
+  // on that re-rasterises the whole image every frame — the single most
+  // expensive thing in this section. Opacity alone is a compositor
+  // operation on an already-rasterised texture, so the chapter change
+  // costs almost nothing. Desktop keeps the scale-and-settle.
+  const CHEAP = matchMedia('(max-width: 760px)').matches;
+  const shown = [null, null, null, null];
   const paint = () => {
     const x = state.x;
     for (let k = 0; k < 4; k++) {
@@ -258,12 +266,22 @@ function initMotion() {
       const w = clamp((0.55 - Math.abs(x - c)) / 0.16, 0, 1);
       const drift = clamp(c - x, -0.65, 0.65);
       figs[k].style.opacity = w;
-      // Only two chapters are ever visible at once. Hiding the other two
-      // lets the compositor skip them entirely — each is a full-viewport
-      // SVG wrapping a ~1.5MP raster, and scale() on that forces a
-      // re-rasterisation every frame it is painted.
-      figs[k].style.visibility = w > 0.004 ? 'visible' : 'hidden';
-      figs[k].style.transform = `scale(${(0.84 + 0.16 * w).toFixed(4)}) rotate(${(drift * 5).toFixed(2)}deg)`;
+      // Only two chapters are ever on screen. Promote just those two —
+      // will-change is written on the transition, never per frame, so
+      // the other two are not holding GPU memory.
+      const on = w > 0.004;
+      if (shown[k] !== on) {
+        shown[k] = on;
+        figs[k].style.visibility = on ? 'visible' : 'hidden';
+        // desktop still animates transform, so it must be promoted too;
+        // mobile is opacity-only and promoting transform there would
+        // re-introduce the raster cost we just removed.
+        figs[k].style.willChange = on ? (CHEAP ? 'opacity' : 'transform, opacity') : 'auto';
+      }
+      if (!CHEAP) {
+        figs[k].style.transform =
+          `scale(${(0.84 + 0.16 * w).toFixed(4)}) rotate(${(drift * 5).toFixed(2)}deg)`;
+      }
       words[k].style.opacity = w;
       words[k].style.transform = `translateY(${(drift * 44).toFixed(1)}px)`;
     }

@@ -1112,3 +1112,12 @@ section[id]{ scroll-margin-top:96px; }
   .cart__scrim{ backdrop-filter:none; -webkit-backdrop-filter:none;
                 background:rgba(20,13,9,.55); }
 }
+
+/* The base .story__fig rule carries transform:scale(.9), and on phones JS
+   no longer writes a per-frame transform (see main.js — scaling an SVG
+   that wraps a raster re-rasterises it every frame). Neutralise the base
+   transform so the artwork sits at its true size, and let opacity alone
+   carry the chapter change. */
+@media (max-width: 760px){
+  .story--scrub .story__fig{ transform:none; }
+}
