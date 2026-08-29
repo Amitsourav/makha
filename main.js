@@ -22,7 +22,10 @@ addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40),
   const ctx = canvas.getContext('2d');
   if (REDUCED || CAPTURE) { canvas.remove(); return; }
 
-  const DPR = Math.min(devicePixelRatio || 1, 2);
+  // A 3x phone rasterises 9x the pixels of a 1x screen for what is a
+  // soft, out-of-focus background. 1.5 is indistinguishable here and
+  // cuts the fill cost by more than half on modern handsets.
+  const DPR = Math.min(devicePixelRatio || 1, innerWidth < 760 ? 1.5 : 2);
   const COUNT = innerWidth < 700 ? 12 : 22;
   // flavor tints the field drifts toward as you scroll (loop-2 architecture)
   const TINTS = [[232, 220, 200], [176, 80, 28], [185, 142, 74], [59, 42, 30]];
@@ -60,28 +63,60 @@ addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40),
 
   const lerp = (a, b, t) => a + (b - a) * t;
 
+  /* ── Sprite cache ───────────────────────────────────────────────
+     Each piece was built from scratch every frame: a radial gradient
+     constructed per piece, plus a shadow ellipse, a filled arc and a
+     stroked arc. That is ~12 gradient objects and ~36 path operations
+     per frame, and gradient construction is the expensive part.
+
+     A makhana puff only ever differs by tint and size, so each tint is
+     rendered once into a small offscreen canvas and then blitted with
+     drawImage(). Scroll tinting is a blend between the base cream and
+     four flavour tints, so we bake a short ramp per tint and pick the
+     nearest step — indistinguishable at 3% steps, and it turns the hot
+     path into a single texture copy per piece. */
+  const RAMP = 12;                     // tint steps baked per flavour
+  const SPRITE_R = 44;                 // sprite is drawn once at this radius
+  const sprites = TINTS.map((tint, ti) =>
+    Array.from({ length: RAMP }, (_, si) => {
+      const k = si / (RAMP - 1);
+      const c = tint.map((v, i) => Math.round(lerp(BASE[i], v, k)));
+      // Body only. The ground shadow must NOT be baked in: the original
+      // draws it before ctx.rotate() so it always stays below the piece,
+      // and baking it here would spin it with the sprite.
+      const pad = 4, size = (SPRITE_R + pad) * 2;
+      const off = document.createElement('canvas');
+      off.width = off.height = size * DPR;
+      const o = off.getContext('2d');
+      o.scale(DPR, DPR);
+      o.translate(size / 2, size / 2);
+      const R = SPRITE_R;
+      const g = o.createRadialGradient(-R * .35, -R * .4, R * .1, 0, 0, R * 1.15);
+      g.addColorStop(0, `rgba(${Math.min(c[0] + 16, 255)},${Math.min(c[1] + 14, 255)},${Math.min(c[2] + 12, 255)},.95)`);
+      g.addColorStop(.75, `rgba(${c[0]},${c[1]},${c[2]},.92)`);
+      g.addColorStop(1, `rgba(${c[0] - 24},${c[1] - 22},${c[2] - 20},.9)`);
+      o.fillStyle = g;
+      o.beginPath(); o.arc(0, 0, R, 0, 7); o.fill();
+      o.strokeStyle = 'rgba(44,29,24,.16)'; o.lineWidth = Math.max(1, R * .06);
+      o.beginPath(); o.arc(0, R * .1, R * .62, Math.PI * 1.15, Math.PI * 1.85); o.stroke();
+      return { cv: off, size };
+    }));
+
   function drawPiece(p, t) {
     const px = p.x * w + mx * 46 * p.z;
     const py = p.y * h + my * 30 * p.z + Math.sin(t * .0006 + p.wob) * 8 * p.z;
-    const c = TINTS[p.tint].map((v, i) => Math.round(lerp(BASE[i], v, scrollP * .85)));
     const R = p.r * (0.8 + p.z * .4);
-
+    const step = Math.min(RAMP - 1, Math.round(scrollP * .85 * (RAMP - 1)));
+    const sp = sprites[p.tint][step];
+    const draw = (R / SPRITE_R) * sp.size;
     ctx.save();
     ctx.translate(px, py);
-    // soft ground shadow — always below, regardless of piece rotation
+    // shadow first, unrotated — a plain ellipse fill, which is cheap;
+    // the gradient was the part worth caching, not this.
     ctx.fillStyle = 'rgba(44,29,24,.05)';
     ctx.beginPath(); ctx.ellipse(3, R * 1.28, R * .8, R * .26, 0, 0, 7); ctx.fill();
     ctx.rotate(p.rot);
-    // body — makhana puff: soft sphere, studio-lit from top-left
-    const g = ctx.createRadialGradient(-R * .35, -R * .4, R * .1, 0, 0, R * 1.15);
-    g.addColorStop(0, `rgba(${Math.min(c[0] + 16, 255)},${Math.min(c[1] + 14, 255)},${Math.min(c[2] + 12, 255)},.95)`);
-    g.addColorStop(.75, `rgba(${c[0]},${c[1]},${c[2]},.92)`);
-    g.addColorStop(1, `rgba(${c[0] - 24},${c[1] - 22},${c[2] - 20},.9)`);
-    ctx.fillStyle = g;
-    ctx.beginPath(); ctx.arc(0, 0, R, 0, 7); ctx.fill();
-    // cleft — the pop scar that makes it read as makhana, not a bubble
-    ctx.strokeStyle = 'rgba(44,29,24,.16)'; ctx.lineWidth = Math.max(1, R * .06);
-    ctx.beginPath(); ctx.arc(0, R * .1, R * .62, Math.PI * 1.15, Math.PI * 1.85); ctx.stroke();
+    ctx.drawImage(sp.cv, -draw / 2, -draw / 2, draw, draw);
     ctx.restore();
   }
 
@@ -259,7 +294,11 @@ function initMotion() {
       // re-evaluated on refresh, so rotation picks up the right distance.
       end: () => '+=' + (matchMedia('(max-width: 760px)').matches ? 200 : 280) + '%',
       pin: '.story__pin',
-      scrub: 0.6,
+      // Smoothing costs responsiveness. On a phone the finger IS the
+      // scrubber, so a 0.6s catch-up keeps animating after the thumb
+      // stops and reads as drift. 06-cut-list.md #13: "luxury is 1:1
+      // input response". Desktop keeps the liquid catch-up.
+      scrub: matchMedia('(max-width: 760px)').matches ? true : 0.6,
       // anticipatePin was removed, not tuned. It pins ahead of the start
       // based on scroll velocity, and on a fast flick that fixed the panel
       // to the viewport up to ~225px BEFORE the section began — so the

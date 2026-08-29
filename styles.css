@@ -1071,3 +1071,44 @@ section[id]{ scroll-margin-top:96px; }
     transform:none;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE SCROLL PERFORMANCE
+   ───────────────────────────────────────────────────────────────────
+   06-cut-list.md #13 already set the rule when Lenis was cut: a
+   full-viewport layer that recomposites on every scroll frame is lag,
+   and "luxury is 1:1 input response". Three such layers were still in
+   place on phones. All of this is <=760px only — desktop keeps the blur,
+   the grain and the layer promotion exactly as designed.
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 760px){
+
+  /* 1. Sticky nav: backdrop-filter is the single most expensive thing a
+        phone can be asked to do while scrolling — the blurred backdrop
+        behind a sticky bar must be re-rendered every frame. The nav is
+        already near-opaque, so the blur is buying almost nothing here. */
+  .nav{ backdrop-filter:none; -webkit-backdrop-filter:none; }
+  .nav, .nav.scrolled{ background:rgba(248,244,238,.97); }
+
+  /* 2. The paper grain is a fixed, full-viewport layer at z-index 2000
+        sitting above every other element — so the compositor keeps a
+        whole-screen texture on top of the page for the life of the
+        scroll. At 3% opacity on a phone screen it is invisible anyway. */
+  body::after{ display:none; }
+
+  /* 3. will-change on four full-viewport chapter SVGs plus four text
+        blocks pins eight layers in GPU memory permanently. paint() only
+        ever shows two chapters, and it already animates transform, so
+        the browser promotes what it needs on its own. */
+  .story--scrub .story__fig, .story--scrub .story__word{ will-change:auto; }
+
+  /* 4. A drop-shadow filter on an SVG that is re-scaled every frame
+        forces a filter pass per frame. The artwork already carries a
+        baked contact shadow, so this was paying twice. (Mine, added in
+        the Apple pass — removing it here.) */
+  .story__fig{ filter:none; }
+
+  /* 5. The cart scrim blurs the whole viewport while the drawer slides. */
+  .cart__scrim{ backdrop-filter:none; -webkit-backdrop-filter:none;
+                background:rgba(20,13,9,.55); }
+}
