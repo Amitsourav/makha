@@ -887,3 +887,49 @@ section[id]{ scroll-margin-top:96px; }
    repaints escaping the pin box. */
 .story__fig{ contain:paint; }
 .story__pin{ contain:layout paint; }
+
+/* --- 13. Scroll story on phones --------------------------------
+   The desktop chapter is a side-by-side composition: type on the left,
+   product on the right. On a phone there is no "beside", so the art was
+   cropped to full-bleed (preserveAspectRatio slice) and the type sat on
+   top of it — cream copy over a cream pack label, effectively invisible,
+   with the pack itself cut mid-word.
+
+   Type and product now get their own halves. Nothing overlaps, the pack
+   is shown whole-ish rather than sliced through its lettering, and the
+   copy sits on the espresso ground where it was designed to be read. */
+@media (max-width: 760px){
+  .story__pin{
+    display:grid; grid-template-rows:auto minmax(0, 1fr);
+    align-items:start;
+    /* The nav is sticky and 103px tall once it wraps to two rows, and the
+       pin starts at 'top top' — so without this the chapter number and
+       eyebrow sat behind it (measured 63px of the eyebrow covered). */
+    padding-top:6.75rem;
+  }
+  .story__overlay{ grid-row:1; padding:0 0 .75rem; }
+  /* the figure stack becomes a real block in row 2 instead of a full-bleed
+     absolute layer behind everything. align-self:stretch is required: the
+     grid aligns to start, and every .story__fig inside is absolutely
+     positioned, so an auto-height figures box would collapse to zero. */
+  .story__figures{
+    position:relative; inset:auto; grid-row:2;
+    align-self:stretch; min-height:0;
+  }
+
+  /* chapter copy tightens so the product keeps meaningful height */
+  .story__words{ min-height:9.5rem; }  /* was leaving ~54px dead */
+  .story__word h2{ font-size:clamp(2.2rem, 11vw, 3rem); }
+  .story__word p{ font-size:.95rem; max-width:34ch; }
+  .story__proof{ gap:.35rem 1.1rem; font-size:.72rem; margin-top:1rem; }
+  .story__proof li:nth-child(n+3){ display:none; } /* two proofs read; three wrap */
+  .story__ctas{ margin-top:1.1rem; gap:.6rem; }
+  .story__meter{ margin-top:1.2rem; }
+}
+
+/* Very short phones: the product band would be squeezed to nothing, so
+   drop the proof line entirely and let the pack breathe. */
+@media (max-width: 760px) and (max-height: 700px){
+  .story__proof{ display:none; }
+  .story__words{ min-height:10rem; }
+}

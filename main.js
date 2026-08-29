@@ -201,7 +201,14 @@ function initMotion() {
     const x = state.x;
     for (let k = 0; k < 4; k++) {
       const c = k + 0.5;
-      const w = clamp((0.65 - Math.abs(x - c)) / 0.3, 0, 1);
+      // Crossfade shape. The original (0.65 / 0.3) held a chapter at full
+      // opacity only within +/-0.35 of its centre, so for roughly 60% of the
+      // scroll two chapters were simultaneously half-visible. On desktop that
+      // reads as a dissolve; on a phone, where the chapters stack, it reads as
+      // doubled, unreadable text. Widening the plateau to +/-0.39 and
+      // shortening the fade band to 0.16 makes the handover decisive while
+      // still overlapping enough to avoid a blank frame at the midpoint.
+      const w = clamp((0.55 - Math.abs(x - c)) / 0.16, 0, 1);
       const drift = clamp(c - x, -0.65, 0.65);
       figs[k].style.opacity = w;
       // Only two chapters are ever visible at once. Hiding the other two
@@ -226,7 +233,11 @@ function initMotion() {
       // 280% = 70% of a viewport per chapter, per 07-motion-spec §2. At the
       // 200% this previously used, chapters turned over 40% faster than the
       // spec intends, which reads as rushed rather than composed.
-      end: '+=280%',
+      // 280% of a tall portrait viewport is a very long hold on a phone,
+      // where the reader scrolls faster; 200% keeps the same four beats
+      // without the section outstaying its welcome. Function form is
+      // re-evaluated on refresh, so rotation picks up the right distance.
+      end: () => '+=' + (matchMedia('(max-width: 760px)').matches ? 200 : 280) + '%',
       pin: '.story__pin',
       scrub: 0.6,
       // anticipatePin was removed, not tuned. It pins ahead of the start
@@ -409,6 +420,18 @@ document.querySelectorAll('.faq__item').forEach(d => {
   }, 800));
 }
 
-// story chapters: on narrow screens, crop toward the product mass (right side)
-if (innerWidth < 700) document.querySelectorAll('.story__fig')
-  .forEach(f => f.setAttribute('preserveAspectRatio', 'xMaxYMid slice'));
+// Story chapters: on phones the figure gets its own band under the copy
+// (see styles.css §13) and fills it by cropping toward the product mass on
+// the right of the artboard. Re-evaluated on resize so a rotation doesn't
+// leave the desktop framing on a portrait screen, or vice versa.
+{
+  const NARROW = '(max-width: 760px)';
+  const figs = document.querySelectorAll('.story__fig');
+  const frameFigs = () => {
+    const narrow = matchMedia(NARROW).matches;
+    figs.forEach(f => f.setAttribute('preserveAspectRatio',
+      narrow ? 'xMaxYMid slice' : 'xMidYMid meet'));
+  };
+  frameFigs();
+  matchMedia(NARROW).addEventListener('change', frameFigs);
+}
