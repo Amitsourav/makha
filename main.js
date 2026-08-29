@@ -424,13 +424,30 @@ document.querySelectorAll('.faq__item').forEach(d => {
 // (see styles.css §13) and fills it by cropping toward the product mass on
 // the right of the artboard. Re-evaluated on resize so a rotation doesn't
 // leave the desktop framing on a portrait screen, or vice versa.
+// Story chapters: reframe the artboard for phones.
+// The chapter artboard is 1440x800 and holds the pack (x 610-1440,
+// y 100-740) plus a watermark numeral on the far left and a caption on
+// the far right. On a phone that whole board letterboxes to a ~200px
+// strip, so the previous fix cropped it with 'slice' — which cut the pack
+// through its own lettering.
+//
+// Apple's rule is that a product render keeps its aspect ratio and only
+// changes scale; it is never cropped. So on phones the viewBox is
+// narrowed to the pack's own bounds instead: the product is framed whole
+// and centred, and the numeral and caption drop away — the overlay
+// already carries the chapter number, and Apple tiles carry no such
+// chrome anyway.
 {
   const NARROW = '(max-width: 760px)';
+  const FULL_BOARD = '0 0 1440 800';
+  const PACK_ONLY  = '610 100 830 640';
   const figs = document.querySelectorAll('.story__fig');
   const frameFigs = () => {
     const narrow = matchMedia(NARROW).matches;
-    figs.forEach(f => f.setAttribute('preserveAspectRatio',
-      narrow ? 'xMaxYMid slice' : 'xMidYMid meet'));
+    figs.forEach(f => {
+      f.setAttribute('viewBox', narrow ? PACK_ONLY : FULL_BOARD);
+      f.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    });
   };
   frameFigs();
   matchMedia(NARROW).addEventListener('change', frameFigs);
