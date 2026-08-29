@@ -166,6 +166,11 @@ function initMotion() {
   }
 
   gsap.registerPlugin(ScrollTrigger);
+  // Mobile browsers fire resize every time the address bar shows or hides.
+  // Left alone, ScrollTrigger re-measures mid-scroll and the pinned story
+  // unpins and jumps — measured: a 900→700 viewport change released the pin
+  // and shifted scroll by 66px. Height-only changes on touch are ignored.
+  ScrollTrigger.config({ ignoreMobileResize: true });
   // Native scroll drives ScrollTrigger. Lenis was cut after real-device QA:
   // buffered wheel input + long easing read as lag-then-lurch, violating
   // "the OS feeling untouched" (see brand/06-cut-list.md #13).
@@ -199,6 +204,11 @@ function initMotion() {
       const w = clamp((0.65 - Math.abs(x - c)) / 0.3, 0, 1);
       const drift = clamp(c - x, -0.65, 0.65);
       figs[k].style.opacity = w;
+      // Only two chapters are ever visible at once. Hiding the other two
+      // lets the compositor skip them entirely — each is a full-viewport
+      // SVG wrapping a ~1.5MP raster, and scale() on that forces a
+      // re-rasterisation every frame it is painted.
+      figs[k].style.visibility = w > 0.004 ? 'visible' : 'hidden';
       figs[k].style.transform = `scale(${(0.84 + 0.16 * w).toFixed(4)}) rotate(${(drift * 5).toFixed(2)}deg)`;
       words[k].style.opacity = w;
       words[k].style.transform = `translateY(${(drift * 44).toFixed(1)}px)`;
@@ -213,10 +223,19 @@ function initMotion() {
     scrollTrigger: {
       trigger: story,
       start: 'top top',
-      end: '+=200%',
+      // 280% = 70% of a viewport per chapter, per 07-motion-spec §2. At the
+      // 200% this previously used, chapters turned over 40% faster than the
+      // spec intends, which reads as rushed rather than composed.
+      end: '+=280%',
       pin: '.story__pin',
       scrub: 0.6,
-      anticipatePin: 1,
+      // anticipatePin was removed, not tuned. It pins ahead of the start
+      // based on scroll velocity, and on a fast flick that fixed the panel
+      // to the viewport up to ~225px BEFORE the section began — so the
+      // makhana pack appeared over the hero above it. Measured: pin
+      // position:fixed at scrollY 720 while the story starts at 945.
+      // The jump it was hiding is better solved by not pinning early.
+      invalidateOnRefresh: true,
       onUpdate(self) { barEl.style.right = (100 - self.progress * 100) + '%'; },
     },
   });

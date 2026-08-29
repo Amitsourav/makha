@@ -34,7 +34,15 @@
 }
 
 *{ margin:0; padding:0; box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
+/* scroll-behavior:smooth was removed, and deliberately.
+   06-cut-list.md #13 cut Lenis because buffered input plus a long ease
+   read as "responds late, then lurches" — the opposite of luxury. CSS
+   smooth scrolling reintroduces exactly that defect for every anchor
+   jump, and it fights ScrollTrigger's scrub: the browser animates the
+   scroll position while the pinned story is re-measuring against it.
+   Anchors now land instantly and exactly; scroll-margin-top below keeps
+   the target clear of the sticky nav. */
+html{ scroll-behavior:auto; }
 body{
   font-family:var(--font-body); background:var(--cream); color:var(--espresso);
   font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
@@ -857,3 +865,25 @@ p, li, h1, h2, h3, h4, a, td, th{ overflow-wrap:break-word; }
   .fcard__index{ font-size:.7rem; }
   .colcard__badge, .btn-add{ font-size:.72rem; }
 }
+
+/* --- 11. Anchor landing under the sticky nav --------------------
+   Every in-page anchor (#flavors, #gifting, #faq) landed the section's
+   top edge at y=0 — i.e. underneath the sticky header, so the heading
+   the user just asked for was the one thing hidden. Measured landing
+   offset was 0px against a ~76px nav plus the announce bar. */
+:target,
+section[id]{ scroll-margin-top:96px; }
+@media (max-width: 1020px){
+  /* the nav wraps to two rows below this width */
+  section[id]{ scroll-margin-top:132px; }
+}
+
+/* --- 12. Scroll story: compositor discipline -------------------
+   .story--scrub puts will-change:transform,opacity on all four chapter
+   figures permanently. Each is a full-viewport SVG wrapping a ~1.5MP
+   raster, so that is four full-screen layers held for the life of the
+   page. paint() now also toggles visibility, which lets the compositor
+   drop the two that are never on screen; contain:paint stops their
+   repaints escaping the pin box. */
+.story__fig{ contain:paint; }
+.story__pin{ contain:layout paint; }
