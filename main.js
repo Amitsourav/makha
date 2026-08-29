@@ -189,6 +189,18 @@ function initMotion() {
   const figs = gsap.utils.toArray('.story__fig');
   const words = gsap.utils.toArray('.story__word');
   const idxEl = document.getElementById('storyIdx');
+  // The primary CTA is shared by all four chapters, so it read "Shop Makhana"
+  // over Popcorn, Protein Puffs and Millet — none of which are on sale. Shelf I
+  // is the only thing that can actually be bought, so the arriving chapters say
+  // so plainly rather than offering a product that does not exist yet.
+  const ctaEl = document.querySelector('.story__ctas .btn--cream');
+  const CTA = [
+    ['Shop Makhana',       'collection.html'],
+    ['Start with Shelf I', 'collection.html'],
+    ['Start with Shelf I', 'collection.html'],
+    ['Start with Shelf I', 'collection.html'],
+  ];
+  let lastIdx = -1;
   const barEl = document.getElementById('storyBar');
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   story.classList.add('story--scrub');
@@ -220,7 +232,15 @@ function initMotion() {
       words[k].style.opacity = w;
       words[k].style.transform = `translateY(${(drift * 44).toFixed(1)}px)`;
     }
-    idxEl.textContent = '0' + (clamp(Math.round(x - 0.5), 0, 3) + 1);
+    const idx = clamp(Math.round(x - 0.5), 0, 3);
+    idxEl.textContent = '0' + (idx + 1);
+    // only touch the DOM when the chapter actually turns over
+    if (idx !== lastIdx) {
+      lastIdx = idx;
+      const [label, href] = CTA[idx];
+      ctaEl.textContent = label;
+      ctaEl.href = href;
+    }
   };
   paint();
   gsap.to(state, {
